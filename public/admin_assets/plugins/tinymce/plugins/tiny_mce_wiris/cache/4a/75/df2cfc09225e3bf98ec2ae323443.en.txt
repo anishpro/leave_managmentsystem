@@ -1,0 +1,1 @@
+{"result":{"text":"equals open parentheses table row h y end table close parentheses degree space almost equal to intersection infinity gg"},"status":"ok"}
