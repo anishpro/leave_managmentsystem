@@ -13,15 +13,17 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
-            $table->id();
-            $table->Integer('parent_id');
-            $table->String('menu_name');
-            $table->String('menu_url');
-            $table->Integer('module_id');
-            $table->Integer('status');
-            $table->timestamps();
-        });
+      if (!Schema::hasTable('menus')) {
+          Schema::create('menus', function (Blueprint $table) {
+              $table->id();
+              $table->unsignedBigInteger('parent_id');
+              $table->String('menu_name');
+              $table->String('menu_url');
+              $table->unsignedBigInteger('module_id');
+              $table->Integer('status');
+              $table->timestamps();
+          });
+      }
     }
 
     /**
