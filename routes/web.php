@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GroupController; 
-use App\Http\Controllers\AdminController; 
-use App\Http\Controllers\PublicHolidaysController; 
-use App\Http\Controllers\EmployeeController; 
-use App\Http\Controllers\EmployeeContractController; 
-use App\Http\Controllers\EmployeePositionController; 
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PublicHolidaysController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeContractController;
+use App\Http\Controllers\EmployeePositionController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\MapContractLeaveController;
@@ -28,15 +28,16 @@ use App\Http\Controllers\MenuController;
 |
 */
 
-// Route::get('/', function () { 
+// Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/', [AdminController::class, 'index']); 
-Route::post('auth', [AdminController::class,'auth'])->name('auth'); 
+// Rfoute::group(['middleware'=>'admin_auth'],function() {
+Route::get('/', function () {
+    return redirect('login');
+});
 
-Route::group(['middleware'=>'admin_auth'],function() {
-
+Route::group(['middleware'=>'auth'], function () {
     //DASHBOARD ROUTE
     Route::get('dashboard', [AdminController::class, 'dashboard']);
     Route::get('fetch-employee-report', [AdminController::class, 'show']);
@@ -88,18 +89,27 @@ Route::group(['middleware'=>'admin_auth'],function() {
     Route::post('update-holiday', [PublicHolidaysController::class, 'update']);
     Route::post('delete-holiday', [PublicHolidaysController::class, 'destroy']);
     
-    //EMPLOYEE ROUTE
-    Route::group(['prefix' => 'employees'], function () {  
-        Route::get('/', [EmployeeController::class, 'index']);
-        Route::get('/create', [EmployeeController::class, 'create']);
-        Route::post('/insert-employee', [EmployeeController::class, 'store']);
-        Route::get('/fetch-employee', [EmployeeController::class, 'show']);
-        Route::get('/edit/{id}', [EmployeeController::class, 'edit']);
-        Route::post('/update-employee', [EmployeeController::class, 'update']); 
-        Route::post('delete-employee', [EmployeeController::class, 'destroy']);
-    }); 
+    //EMPLOYEE ROUTES OLD
+    // Route::group(['prefix' => 'employees'], function () {
+    //     Route::get('/', [EmployeeController::class, 'index']);
+    //     Route::get('/create', [EmployeeController::class, 'create']);
+    //     Route::post('/insert-employee', [EmployeeController::class, 'store']);
+    //     Route::get('/fetch-employee', [EmployeeController::class, 'show']);
+    //     Route::get('/edit/{id}', [EmployeeController::class, 'edit']);
+    //     Route::post('/update-employee', [EmployeeController::class, 'update']);
+    //     Route::post('delete-employee', [EmployeeController::class, 'destroy']);
+    // });
 
-    //EMPLOYEE CONTRACT ROUTE 
+    //EMPLOYEE CONTRACT ROUTE
+    Route::get('employees', [EmployeeController::class, 'index']);
+    Route::get('add-employee', [EmployeeController::class, 'create']);
+    Route::post('insert-employee', [EmployeeController::class, 'store']);
+    Route::get('fetch-employee', [EmployeeController::class, 'show']);
+    Route::get('edit-employee', [EmployeeController::class, 'edit']);
+    Route::post('update-employee', [EmployeeController::class, 'update']);
+    Route::post('delete-employee', [EmployeeController::class, 'destroy']);
+
+    //EMPLOYEE CONTRACT ROUTE
     Route::get('employee_contract', [EmployeeContractController::class, 'index']);
     Route::get('add-contract', [EmployeeContractController::class, 'create']);
     Route::post('insert-contract', [EmployeeContractController::class, 'store']);
@@ -108,7 +118,7 @@ Route::group(['middleware'=>'admin_auth'],function() {
     Route::post('update-contract', [EmployeeContractController::class, 'update']);
     Route::post('delete-contract', [EmployeeContractController::class, 'destroy']);
 
-    //EMPLOYEE LEAVE APPLICATION ROUTE   
+    //EMPLOYEE LEAVE APPLICATION ROUTE
     Route::group(['prefix' => 'application'], function () {
         Route::get('/', [LeaveApplicationController::class, 'index']);
         Route::get('/create', [LeaveApplicationController::class, 'create']);
@@ -118,11 +128,10 @@ Route::group(['middleware'=>'admin_auth'],function() {
         Route::post('/update-application', [LeaveApplicationController::class, 'update']);
         Route::post('/delete-leaveapplication', [LeaveApplicationController::class, 'destroy']);
         Route::get('/application_pdf/pdf/{id}', [LeaveApplicationController::class, 'pdf']);
-        
     });
 
-    //DUTY DEDUCTION 
-    Route::get('duty_deduction', [DeductionController::class, 'index']); 
+    //DUTY DEDUCTION
+    Route::get('duty_deduction', [DeductionController::class, 'index']);
     Route::get('add-deduction', [DeductionController::class, 'create']);
     Route::post('insert-deduction', [DeductionController::class, 'store']);
     Route::get('fetch-deduction', [DeductionController::class, 'show']);
@@ -130,9 +139,8 @@ Route::group(['middleware'=>'admin_auth'],function() {
     Route::post('update-deduction', [DeductionController::class, 'update']);
     Route::post('delete-deduction', [DeductionController::class, 'destroy']);
 
-    //DUTY TRAVEL    
+    //DUTY TRAVEL
     Route::group(['prefix' => 'travel'], function () {
-
         Route::get('/', [TravelDetailController::class, 'index']);
         Route::get('/add/{id}', [TravelDetailController::class, 'create']);
         Route::post('/save-travel', [TravelDetailController::class, 'store']);
@@ -142,12 +150,10 @@ Route::group(['middleware'=>'admin_auth'],function() {
         Route::post('/update-travel', [TravelDetailController::class, 'update']);
         Route::post('/delete-travel', [TravelDetailController::class, 'destroy']);
         Route::get('/dynamic_pdf/pdf/{id}', [TravelDetailController::class, 'pdf']);
-        
     });
 
-    //TRAVEL REQUEST    
+    //TRAVEL REQUEST
     Route::group(['prefix' => 'travel_request'], function () {
-
         Route::get('/', [RequestTravelController::class, 'index']);
         Route::get('/add', [RequestTravelController::class, 'create']);
         Route::get('/fetch_travelrequest', [RequestTravelController::class, 'show']);
@@ -156,7 +162,6 @@ Route::group(['middleware'=>'admin_auth'],function() {
         Route::post('/get-remmendedby-employee-list', [RequestTravelController::class, 'getRecommendedEmployeeList']);
         Route::get('/edit/{id}', [RequestTravelController::class, 'edit']);
         Route::post('/update-request-travel', [RequestTravelController::class, 'update']);
-
     });
 
     //DUTY STATION
@@ -166,7 +171,7 @@ Route::group(['middleware'=>'admin_auth'],function() {
     Route::get('fetch-station', [DutyStationController::class, 'show']);
     Route::get('edit-station', [DutyStationController::class, 'edit']);
     Route::post('update-station', [DutyStationController::class, 'update']);
-    Route::post('delete-station', [DutyStationController::class, 'destroy']); 
+    Route::post('delete-station', [DutyStationController::class, 'destroy']);
     
     //MENU ROUTE
     // Route::get('menu', [MenuController::class, 'index']);
@@ -175,14 +180,16 @@ Route::group(['middleware'=>'admin_auth'],function() {
     // Route::get('fetch-group', [MenuController::class, 'show']);
     // Route::get('edit-group', [MenuController::class, 'edit']);
     // Route::post('update-group', [MenuController::class, 'update']);
-    // Route::post('delete-group', [MenuController::class, 'destroy']);    
+    // Route::post('delete-group', [MenuController::class, 'destroy']);
 
-    //ROLE PERMISSION    
+    //ROLE PERMISSION
     Route::get('access_control', [MenuPermissionController::class, 'index']);
     Route::post('fetch-role-permiision', [MenuPermissionController::class, 'show']);
-    Route::post('insert-role-permission', [MenuPermissionController::class, 'store']);  
+    Route::post('insert-role-permission', [MenuPermissionController::class, 'store']);
 
     //LEAVE REPORT
     Route::get('leave_report', [LeaveApplicationController::class, 'leaveReport']);
     Route::get('/leavereport_pdf/pdf/{id}/{leave_type}', [LeaveApplicationController::class, 'pdfReport']);
 });
+
+Auth::routes();

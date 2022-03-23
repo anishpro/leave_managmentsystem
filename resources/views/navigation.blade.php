@@ -57,7 +57,15 @@
                             <li><a href="profile.php"><i class="bx bx-user f-s-16 align-middle"></i> Profile</a></li>
                             <li><a href="change_password.php"><i class="bx bx-lock f-s-16 align-middle"></i> Change Password</a></li>
                             <li role="separator" class="divider"></li>    
-                            <li><a href="{{url('logout')}}"><i class="bx bx-log-out-circle f-s-16 align-middle"></i> Logout</a></li>
+                            <li>
+                                <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="bx bx-log-out-circle f-s-16 align-middle"></i> {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </li>
