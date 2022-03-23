@@ -13,12 +13,14 @@ class CreateMenuPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_permissions', function (Blueprint $table) {
-            $table->id();
-            $table->Integer('role_id');
-            $table->Integer('menu_id');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('menu_permissions')) {
+            Schema::create('menu_permissions', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('role_id');
+                $table->unsignedBigInteger('menu_id');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
