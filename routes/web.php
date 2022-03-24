@@ -16,6 +16,7 @@ use App\Http\Controllers\RequestTravelController;
 use App\Http\Controllers\DutyStationController;
 use App\Http\Controllers\MenuPermissionController;
 use App\Http\Controllers\MenuController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ use App\Http\Controllers\MenuController;
 Route::get('/', function () {
     return redirect('login');
 });
+
+// Route::get('profile', function () {
+//     dd('verified')
+// })->middleware('verified');
 
 Route::group(['middleware'=>'auth'], function () {
     //DASHBOARD ROUTE
@@ -192,4 +197,6 @@ Route::group(['middleware'=>'auth'], function () {
     Route::get('/leavereport_pdf/pdf/{id}/{leave_type}', [LeaveApplicationController::class, 'pdfReport']);
 });
 
+//auth routes
 Auth::routes();
+Auth::routes(['verify' => true]);
