@@ -5,9 +5,11 @@
     
 </head>
 <body class="fix-header fix-sidebar">
-    @yield('content')
-    @yield('css')
-    @yield('js')
-    @include('common.footer')
+    <div id="app">
+        @yield('content')
+        @yield('css')
+        @yield('js')
+        @include('common.footer')
+    </div>
 </body>
 </html>

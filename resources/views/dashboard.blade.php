@@ -1,6 +1,6 @@
 @extends('layouts.master')
     
-    @section('content')
+@section('content')
 
         <!-- Preloader -->
         <div class="preloader">
@@ -63,6 +63,9 @@
                         </div>
 
                     </div><!-- /.row -->
+
+                    <router-view name="backend"></router-view>
+                    <vue-progress-bar></vue-progress-bar>
 
                 </div><!-- /.container-fluid --> 
 
