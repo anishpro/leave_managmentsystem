@@ -26,7 +26,7 @@ class PermissionController extends Controller
     public function index()
     {
         $data =[];
-        $data['permissions']= $this->modal->select('name', 'guard_name', 'id')->latest()->get();
+        $data['permissions']= $this->model->select('name', 'guard_name', 'id')->latest()->get();
         return response()->json($data);
     }
 
@@ -40,7 +40,7 @@ class PermissionController extends Controller
     {
         $data['error']='true';
         try {
-            $permission =  $this->modal->create(['name'=>$request['name'],'guard_name'=>$request['guard_name']]);
+            $permission =  $this->model->create(['name'=>$request['name'],'guard_name'=>$request['guard_name']]);
 
             $data['error']='false';
             $data['message']='Permission '.$permission->name.' Has Been Created';
@@ -75,7 +75,7 @@ class PermissionController extends Controller
         $data['error']='true';
 
         try {
-            $permission =  $this->modal->findOrFail($id);
+            $permission =  $this->model->findOrFail($id);
 
             $data['error']='false';
             $permission->name = $request['name'];
@@ -100,7 +100,7 @@ class PermissionController extends Controller
     public function destroy($id)
     {
         try {
-            $permission =  $this->modal->findOrFail($id);
+            $permission =  $this->model->findOrFail($id);
             //delete the permission
             $permission->delete();
         } catch (\Exception $e) {

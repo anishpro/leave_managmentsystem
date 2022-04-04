@@ -1,6 +1,5 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-Vue.use(VueRouter);
+import {createRouter, createWebHistory} from 'vue-router';
+
 import NotFoundPage from "../components/Pages/NotFoundPage.vue";
 import Role from "../components/Pages/Roles.vue";
 import Permission from "../components/Pages/Permissions.vue";
@@ -31,14 +30,13 @@ const routes = [
     }
   },
 
-
-
 ];
 
-const router = new VueRouter({
-  mode: "history",
+
+export const router = createRouter({
+  history: createWebHistory(),
   routes,
   linkActiveClass: 'active'
+
 });
 
-export default router;

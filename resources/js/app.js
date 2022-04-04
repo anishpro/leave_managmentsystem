@@ -7,101 +7,121 @@
 require('./bootstrap');
 
 import router from "./router/index";
+//font awesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+import { faHatWizard } from '@fortawesome/free-solid-svg-icons'
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faHatWizard)
 
 
-window.Vue = require('vue').default;
-/*Start of Progress Bar*/
-// Progress bar include
-import VueProgressBar from 'vue-progressbar';
-/*Define Options for progress bar*/
+require('./bootstrap');
+import Vue from 'vue'
+import { createApp } from 'vue'
+
+const app = createApp({
+    router,
+})
+
+app.component('font-awesome-icon', FontAwesomeIcon)
+
+//router import
+import { router } from "./router/index";
+
+// /*Sweet alert start*/
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 const options = {
-    color: '#bffaf3',
+    confirmButtonColor: '#41b882',
+    cancelButtonColor: '#ff7674',
+  };
+  
+app.use(VueSweetalert2, options);
+
+// //vform
+
+import {
+    Button,
+    HasError,
+    AlertError,
+    AlertErrors,
+    AlertSuccess
+  } from 
+  'vform/src/components/bootstrap5'
+//   'vform/src/components/bootstrap4'
+  // 'vform/src/components/tailwind'
+  
+  app.component(Button.name, Button)
+  app.component(HasError.name, HasError)
+  app.component(AlertError.name, AlertError)
+  app.component(AlertErrors.name, AlertErrors)
+  app.component(AlertSuccess.name, AlertSuccess)
+
+
+import LaravelVuePagination from 'laravel-vue-pagination';
+
+app.component('pagination', require('laravel-vue-pagination'));
+
+app.component( 'not-found',require('./components/Pages/NotFoundPage.vue').default);
+
+/*This is global filters for Vue JS*/
+/*Upper case Filter*/
+
+app.config.globalProperties.$filters = {
+    upText(text) {
+        return text.charAt(0).toUpperCase() + text.slice(1);
+    },
+}
+
+app.config.globalProperties.$filters = {
+    subStr(text) {
+        return text.substring(0, 10);
+    },
+}
+
+/*Moment JS to format Date*/
+import moment from 'moment'; //format date in vue
+app.config.globalProperties.$filters = {
+    myDate(created) {
+        return moment(created).format('YYYY / MM  / DD'); // April 7th 2019,(h:mm:ss a) 3:34:44 pm
+    },
+}
+app.config.globalProperties.$filters = {
+    duration(created) {
+        return moment(created).toNow('UTC'); // April 7th 2019,(h:mm:ss a) 3:34:44 pm
+    },
+}
+import VueProgressBar from "@aacassandra/vue3-progressbar";
+const option = {
+    color: '#008dc9',
     failedColor: '#874b4b',
-    thickness: '8px',
+    thickness: '5px',
     transition: {
-        speed: '0.2s',
-        opacity: '0.6s',
-        termination: 300
+      speed: '0.2s',
+      opacity: '0.6s',
+      termination: 300
     },
     autoRevert: true,
     location: 'top',
     inverse: false
-};
-/*End of defination*/
-/*Call the progress bar*/
-Vue.use(VueProgressBar, options)
-/*End of Progress Bar*/
-
-/*Sweet alert start*/
-
-import Swal from "sweetalert2";
-window.swal = Swal;
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000
-});
-
-window.Toast = Toast;
-
-//vform
-import Vue from 'vue'
-import { Form, HasError, AlertError } from 'vform'
-window.Form = Form;
-
-Vue.component(HasError.name, HasError)
-Vue.component(AlertError.name, AlertError)
-
-Vue.component('pagination', require('laravel-vue-pagination'));
-
-Vue.component( 'not-found',require('./components/Pages/NotFoundPage.vue').default
-);
-
-/*This is global filters for Vue JS*/
-/*Upper case Filter*/
-Vue.filter('upText', function(text){
-    return text.charAt(0).toUpperCase() + text.slice(1);
-});
-
-Vue.filter('subStr', function(text){
-    return text.substring(0, 10);
-});
-
-/*Moment JS to format Date*/
-import moment from 'moment'; //format date in vue
-
-Vue.filter('myDate', function(created){
-    return moment(created).format('YYYY / MM  / DD'); // April 7th 2019,(h:mm:ss a) 3:34:44 pm
-});
-Vue.filter('duration', function(created){
-    return moment(created).toNow('UTC'); // April 7th 2019,(h:mm:ss a) 3:34:44 pm
-});
-
-
-
-/*Start of Custom Event Listner Vue - Fires an event after a change*/
-let Fire = new Vue();
-window.Fire = Fire;
-
-/*End of Custom event listner*/
-
+  }
+  
+app.use(VueProgressBar, option)
 /*Gate for Vue ACL in frontend*/
 import Gate from "./Gate";
-Vue.prototype.$gate = new Gate(window.user);
+//global gate
+app.config.globalProperties.$gate = new Gate(window.user);
 
 /*End of ACL authontication*/
+/*Start of Custom Event Listner Vue - Fires an event after a change*/
+import mitt from 'mitt';
+const emitter = mitt();
+app.config.globalProperties.emitter = emitter;
 
-const app = new Vue({
-    el: '#app',
-    router,
-    data:{
-        search:'',
-    },
-    methods:{
-        searchit: _.debounce(() =>{
-            Fire.$emit('searching');
-        },1000) 
-    }
-});
+
+app.use(router)
+    
+app.mount('#app')

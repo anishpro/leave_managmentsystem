@@ -7,7 +7,7 @@
                         <h3 class="card-title">Permission Management</h3>
 
                         <div class="card-tools">
-                            <button type="" class="btn btn-primary" @click="newModal"><i class="fas fa-user-plus fa-fw"></i>Add New Permission</button>
+                            <button type="" class="btn btn-primary" @click="newModal"><font-awesome-icons icon="HatWizard" /> Add New Permission</button>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -49,9 +49,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" v-show="!editmode" id="addNewPermissionLabel">Add New Permission</h5>
                         <h5 class="modal-title" v-show="editmode" id="addNewPermissionLabel">Update {{permission}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        
                     </div>
                     <form  @submit.prevent="editmode ? updatePermission() : createPermission()">
                         <div class="modal-body">
@@ -80,9 +78,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close</button>
-                            <button v-show="editmode" type="submit" class="btn btn-success"><i class="fas fa-plus fa-fw"></i>Update</button>
-                            <button v-show="!editmode" type="submit" class="btn btn-primary"><i class="fas fa-plus fa-fw"></i>Create</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times fa-fw"></i>Close</button>
+                            <button v-show="editmode" type="submit" class="btn btn-success"><i class="fa fa-plus fa-fw"></i>Update</button>
+                            <button v-show="!editmode" type="submit" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>Create</button>
                         </div>
                     </form>
                 </div>
@@ -91,12 +89,16 @@
     </div>
 </template>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
 
 <script>
+
     import Multiselect from 'vue-multiselect'
+    import Form from 'vform'
+    import { Button, HasError, AlertError } from 'vform/src/components/bootstrap5'
+
     export default {
-        components: { Multiselect },
+        components: { Multiselect,HasError },
         data(){
             return {
                 selected: false,
@@ -136,14 +138,14 @@
                 this.form.post('../api/permission') // POST form data
                     //Start Condition to check form is validate
                     .then((response)=>{
-                        Fire.$emit('AfterCreate'); //custom event to reload data
+                        this.emitter.emit('AfterCreate'); //custom event to reload data
 
                         $("#addNewPermission").modal('hide'); //Hide the model
 
                         this.$Progress.finish(); //End the progress bar
 
                         //Sweetalert notification for the result
-                        swal.fire({
+                        this.$swal({
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
@@ -157,7 +159,7 @@
                     })
                     //if form is not valid of handle any errors
                     .catch((response)=>{
-                        swal.fire({
+                        this.$swal({
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
@@ -171,7 +173,7 @@
             },
             /*==== End of Role Create ====*/
 
-            /*==== Call edit Modal with user data ====*/
+            /*==== Call edit Modal with permission data ====*/
             editModal(permission){
                 this.editmode = true;
                 this.form.reset();
@@ -179,14 +181,14 @@
                 $('#addNewPermission').modal('show');
                 this.form.fill(permission);
             },
-            /*Edit User Function*/
+            /*Edit permission Function*/
             updatePermission(id){
                 this.$Progress.start();
                 //console.log('editing data');
                 this.form.put('../api/permission/'+this.form.id)
                     .then((response) =>{
                         if(response.data.error == 'true'){
-                            swal.fire({
+                            this.$swal({
                                 toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
@@ -198,13 +200,13 @@
                         }
                         else{
                             $("#addNewPermission").modal('hide'); //Hide the model
-                            swal.fire(
+                            this.$swal(
                                 'Updated!',
                                 response.data.message,
                                 'success'
                             )
                             this.$Progress.finish();
-                            Fire.$emit('AfterCreate'); //Fire an reload event
+                            this.emitter.emit('AfterCreate'); //Fire an reload event
                             this.$Progress.fail();
                         }
                     }).catch(()=>{
@@ -213,29 +215,27 @@
             },
             /*==== End of edit user function ====*/
 
-            /*==== Call Delete Modal uith user id ====*/
+            /*==== Call Delete Modal uith permission id ====*/
             deletePermission(id,name){
-                swal.fire({
+                this.$swal({
                 title: 'Delete '+ name +' ?',
                 text: "You won't be able to revert this!",
-                type: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     //send an ajax request to the server
                     if (result.value) {
                         this.form.delete('../api/permission/' + id).
                         then(() => {
-                            swal.fire(
+                            this.$swal(
                                 'Deleted!',
                                 'Permission '+ name + ' has been deleted successfully',
                                 'success'
                             )
-                            Fire.$emit('AfterCreate'); //Fire an reload event
+                            this.emitter.emit('AfterCreate'); //Fire an reload event
                         }).catch(() => {
-                            swal.fire(
+                            this.$swal(
                                 'Warning!',
                                 'Unauthorized Access to delete.',
                                 'warning'
@@ -249,15 +249,11 @@
         },
         created() {
             this.loadPermissions(); //load the roles in the table
-
             //Load the userlist if add or created a new user
-            Fire.$on("AfterCreate",()=>{
+            this.emitter.on("AfterCreate",()=>{
                 this.loadPermissions();
             })
         },
-        mounted() {
-            console.log('Component mounted.')
-        }
 
     }
 </script>

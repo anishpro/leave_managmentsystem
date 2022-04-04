@@ -9,7 +9,7 @@
         @yield('content')
         @yield('css')
         @yield('js')
-        @include('common.footer')
     </div>
+    @include('common.footer')
 </body>
 </html>

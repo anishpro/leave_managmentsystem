@@ -132,9 +132,13 @@
 </template>
 <script>
     import Multiselect from 'vue-multiselect'
+    import Form from 'vform'
+    import { Button, HasError, AlertError } from 'vform/src/components/bootstrap5'
+
     export default {
         components: {
             Multiselect,
+            HasError
         },
         /*Filling the data into form*/
         data() {

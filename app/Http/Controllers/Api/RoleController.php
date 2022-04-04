@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Rols\StoreRoleValidation;
-use App\Http\Requests\Rols\UpdateRoleValidation;
-use Illuminate\Http\Request;
+use App\Http\Requests\Role\StoreRoleValidation as RoleStoreRoleValidation;
+use App\Http\Requests\Role\UpdateRoleValidation as RoleUpdateRoleValidation;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -39,7 +38,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRoleValidation $request)
+    public function store(RoleStoreRoleValidation $request)
     {
         $data['error']='true';
         try {
@@ -74,7 +73,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRoleValidation $request, $id)
+    public function update(RoleUpdateRoleValidation $request, $id)
     {
         $data['error']='true';
 

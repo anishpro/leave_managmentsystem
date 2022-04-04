@@ -74,7 +74,7 @@
 @endsection
 
 
-@section('scriptcontent')
+{{-- @section('scriptcontent')
         <script type="text/javascript">
             $(document).ready(function() {  
 
@@ -113,7 +113,7 @@
             });
 
         </script>
-    @endsection
+    @endsection --}}
 
     
         

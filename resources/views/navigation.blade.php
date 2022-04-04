@@ -97,15 +97,14 @@
                     <ul class="nav nav-treeview pl-2">
                         <li class="nav-item">
                             <router-link :to="{name:'roles'}" class="nav-link">
-                                <i class="nav-icon green fas fa-users-cog"></i>
-                                <p>Roles</p>
+                                <i class="nav-icon green fa fa-users-cog"></i>  Roles
                             </router-link>
                         </li>
                         <div class="dropdown-divider"></div>
                         <li class="nav-item">
                             <router-link :to="{name:'permissions'}" class="nav-link">
-                                <i class="nav-icon gray fas fa-key"></i>
-                                <p>Permissions</p>
+                                
+                                <i class="nav-icon gray fa fa-key"></i> Permissions
                             </router-link>
                         </li>
                         <div class="dropdown-divider"></div>
