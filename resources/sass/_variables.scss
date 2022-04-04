@@ -18,3 +18,96 @@ $secondary-color-green: #91c841;
 $secondary-color-light-orange: #f89f6b;
 $secondary-color-pink: #A76389;
 
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66D9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffe600;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+$black: #2d2d2d;
+
+.blue{
+  color:$blue;
+}
+.indigo{
+  color:$indigo;
+}
+.purple{
+  color:$purple;
+}
+.pink{
+  color:$pink;
+}
+.red{
+  color:$red;
+}
+.orange{
+  color: $orange;
+}
+.yellow{
+  color:$yellow;
+}
+.green{
+  color:$green;
+}
+.teal{
+  color:$teal;
+}
+.cyan{
+  color:$cyan;
+}
+.black{
+  color: $black;
+}
+
+
+.blue-bg{
+    color:#fff;
+    background-color:$blue;
+  }
+  .indigo-bg{
+    color:#fff;
+    background-color:$indigo;
+  }
+  .purple-bg{
+    color:#fff;
+    background-color:$purple;
+  }
+  .pink-bg{
+    color:#fff;
+    background-color:$pink;
+  }
+  .red-bg{
+    color:#fff;
+    background-color:$red;
+  }
+  .orange-bg{
+    color:#fff;
+    background-color: $orange;
+  }
+  .yellow-bg{
+    color:#fff;
+    background-color:$yellow;
+  }
+  .green-bg{
+    color:#fff;
+    background-color:$green;
+  }
+  .teal-bg{
+    color:#fff;
+    background-color:$teal;
+  }
+  .cyan-bg{
+    color:#fff;
+    background-color:$cyan;
+  }
+  .black-bg{
+    color:#fff;
+    background-color: $black;
+  }

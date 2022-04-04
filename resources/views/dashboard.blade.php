@@ -74,6 +74,7 @@
 @endsection
 
 
+
 {{-- @section('scriptcontent')
         <script type="text/javascript">
             $(document).ready(function() {  

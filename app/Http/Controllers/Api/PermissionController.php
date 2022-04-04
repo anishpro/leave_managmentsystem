@@ -109,4 +109,8 @@ class PermissionController extends Controller
 
         return ['message' =>'Permission Deleted'];
     }
+    public function authPermissions()
+    {
+        return auth()->user()->getAllPermissions()->pluck('name');
+    }
 }

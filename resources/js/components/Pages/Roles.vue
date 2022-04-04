@@ -128,7 +128,7 @@
         methods:{
             /*==== Show existing Role function ====*/
             loadRoles(){
-                axios.get("../api/role")
+                axios.get("/api/role")
                     .then(({ data }) => (
                         this.roles = data.roles,
                             this.permissions= data.permissions,
@@ -146,7 +146,7 @@
             createRole(){
                 this.$Progress.start(); //start a progress bar
                 this.user= this.form.name;
-                this.form.post('../api/role') // POST form data
+                this.form.post('/api/role') // POST form data
                     //Start Condition to check form is validate
                     .then((response)=>{
                         this.emitter.emit('AfterCreate'); //custom event to reload data
@@ -189,7 +189,7 @@
             updateRole(id){
                 this.$Progress.start();
                 //console.log('editing data');
-                this.form.put('../api/role/'+this.form.id)
+                this.form.put('/api/role/'+this.form.id)
                     .then((response) =>{
                         if(response.data.error == 'true'){
                             this.$swal({

@@ -116,7 +116,7 @@
         methods:{
             /*==== Show existing Role function ====*/
             loadPermissions(){
-                axios.get("../api/permission")
+                axios.get("/api/permission")
                     .then(({ data }) => (
                         this.permissions= data.permissions,
                             this.totalpermission = data.permissions.length
@@ -135,7 +135,7 @@
             createPermission(){
                 this.$Progress.start(); //start a progress bar
                 this.permission= this.form.name;
-                this.form.post('../api/permission') // POST form data
+                this.form.post('/api/permission') // POST form data
                     //Start Condition to check form is validate
                     .then((response)=>{
                         this.emitter.emit('AfterCreate'); //custom event to reload data
@@ -185,7 +185,7 @@
             updatePermission(id){
                 this.$Progress.start();
                 //console.log('editing data');
-                this.form.put('../api/permission/'+this.form.id)
+                this.form.put('/api/permission/'+this.form.id)
                     .then((response) =>{
                         if(response.data.error == 'true'){
                             this.$swal({
@@ -226,7 +226,7 @@
                 }).then((result) => {
                     //send an ajax request to the server
                     if (result.value) {
-                        this.form.delete('../api/permission/' + id).
+                        this.form.delete('/api/permission/' + id).
                         then(() => {
                             this.$swal(
                                 'Deleted!',

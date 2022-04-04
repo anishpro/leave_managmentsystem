@@ -118,4 +118,8 @@ class RoleController extends Controller
         }
         return $response;
     }
+    public function authRoles()
+    {
+        return auth()->user()->getRoleNames();
+    }
 }

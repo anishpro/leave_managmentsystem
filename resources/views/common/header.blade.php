@@ -8,7 +8,6 @@
     
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-
     <!-- Core CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/bootstrap-select/dist/css/bootstrap-select.css')}}">
@@ -24,4 +23,4 @@
     <script type="text/javascript" src="{{asset('admin_assets/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin_assets/js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin_assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js')}}"></script>
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}

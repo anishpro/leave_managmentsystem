@@ -11,5 +11,10 @@
         @yield('js')
     </div>
     @include('common.footer')
+    @auth
+        <script>
+            window.user = @json(auth()->user()->roles->pluck('name'));           
+        </script>
+    @endauth
 </body>
 </html>

@@ -15,15 +15,23 @@ import { faHatWizard } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faHatWizard)
-
+import VueGates from 'vue-gates';
 
 require('./bootstrap');
-import Vue from 'vue'
 import { createApp } from 'vue'
 
 const app = createApp({
     router,
+    // data(){
+    //     return {
+    //         gate : window.user
+    //     }
+    // }
 })
+
+
+app.use(VueGates);
+
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -113,6 +121,7 @@ app.use(VueProgressBar, option)
 /*Gate for Vue ACL in frontend*/
 import Gate from "./Gate";
 //global gate
+
 app.config.globalProperties.$gate = new Gate(window.user);
 
 /*End of ACL authontication*/

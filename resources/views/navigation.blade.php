@@ -110,6 +110,12 @@
                         <div class="dropdown-divider"></div>
                     </ul>
                 </li> 
+                <li class="nav-label">
+                    <router-link :to="{name:'users'}" class="nav-link">
+                        <i class="nav-icon gray fa fa-users"></i> Users
+                    </router-link>
+                </li> 
+                
                 @endrole
 
                 <?php
