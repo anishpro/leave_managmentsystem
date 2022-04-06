@@ -85,6 +85,38 @@
                         <span class="hide-menu">Dashboard </span> 
                     </a>
                 </li> 
+                @role('admin|super-admin|super-dev')
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-hard-hat orange nav-icon"></i>
+                        <p>
+                            Development Mode
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview pl-2">
+                        <li class="nav-item">
+                            <router-link :to="{name:'roles'}" class="nav-link">
+                                <i class="nav-icon green fa fa-users-cog"></i>  Roles
+                            </router-link>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item">
+                            <router-link :to="{name:'permissions'}" class="nav-link">
+                                
+                                <i class="nav-icon gray fa fa-key"></i> Permissions
+                            </router-link>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                    </ul>
+                </li> 
+                <li class="nav-label">
+                    <router-link :to="{name:'users'}" class="nav-link">
+                        <i class="nav-icon gray fa fa-users"></i> Users
+                    </router-link>
+                </li> 
+                
+                @endrole
 
                 <?php
                     $sideMenu = showMenu();

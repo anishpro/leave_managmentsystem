@@ -7,8 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 
     <!-- Core CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css')}}">
@@ -25,3 +23,4 @@
     <script type="text/javascript" src="{{asset('admin_assets/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin_assets/js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admin_assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js')}}"></script>
+    {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}

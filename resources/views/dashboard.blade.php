@@ -1,6 +1,6 @@
 @extends('layouts.master')
     
-    @section('content')
+@section('content')
 
         <!-- Preloader -->
         <div class="preloader">
@@ -64,6 +64,9 @@
 
                     </div><!-- /.row -->
 
+                    <router-view name="backend"></router-view>
+                    <vue-progress-bar></vue-progress-bar>
+
                 </div><!-- /.container-fluid --> 
 
             </div><!-- /.page-wrapper -->
@@ -71,7 +74,8 @@
 @endsection
 
 
-@section('scriptcontent')
+
+{{-- @section('scriptcontent')
         <script type="text/javascript">
             $(document).ready(function() {  
 
@@ -110,7 +114,7 @@
             });
 
         </script>
-    @endsection
+    @endsection --}}
 
     
         

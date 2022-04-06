@@ -200,3 +200,4 @@ Route::group(['middleware'=>'auth'], function () {
 //auth routes
 Auth::routes();
 Auth::routes(['verify' => true]);
+Route::get('/admin/{path}', [AdminController::class, 'dashboard'])->where('path', '([A-z\/_.\d-]+)?');
