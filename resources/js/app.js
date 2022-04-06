@@ -6,7 +6,6 @@
 
 require('./bootstrap');
 
-import router from "./router/index";
 //font awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 
