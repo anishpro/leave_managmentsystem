@@ -67,11 +67,6 @@ import {
   app.component(AlertErrors.name, AlertErrors)
   app.component(AlertSuccess.name, AlertSuccess)
 
-
-import LaravelVuePagination from 'laravel-vue-pagination';
-
-app.component('pagination', require('laravel-vue-pagination'));
-
 app.component( 'not-found',require('./components/Pages/NotFoundPage.vue').default);
 
 /*This is global filters for Vue JS*/
