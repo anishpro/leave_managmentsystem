@@ -14,7 +14,6 @@ class UpdateUnsignedIndex extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->unsignedBigInteger('role_id')->change();
             $table->unsignedBigInteger('group_id')->change();
             $table->unsignedBigInteger('position')->change();
             $table->unsignedBigInteger('duty_station')->change();

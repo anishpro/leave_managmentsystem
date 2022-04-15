@@ -2,11 +2,10 @@
 <div class="header is_stuck">
     <nav class="navbar top-navbar navbar-expand-md navbar-light"> 
         <div class="navbar-header"> 
-            <a class="navbar-brand" href="index.php">  
-                <!-- Logo icon -->
-                <!-- <b><img src="#" alt="homepage" class="dark-logo" style="height: 22px; vertical-align: middle;"></b> -->
+            <router-link :to="{name:'dashboard'}" class="navbar-brand">
                 <span class="align-middle text-white f-s-20 text-capitalize f-w-500">LeaveManagement</span> 
-            </a>
+            </router-link>
+            
         </div>
                         
         <div class="navbar-collapse">  
@@ -54,7 +53,11 @@
 
                     <div class="dropdown-menu dropdown-menu-right"> 
                         <ul class="dropdown-user">
-                            <li><a href="profile.php"><i class="bx bx-user f-s-16 align-middle"></i> Profile</a></li>
+                            <li>
+                                <router-link :to="{name:'profile'}" >
+                                    <i class="bx bx-user f-s-16 align-middle"></i> Profile
+                                </router-link>
+                            </li>
                             <li><a href="change_password.php"><i class="bx bx-lock f-s-16 align-middle"></i> Change Password</a></li>
                             <li role="separator" class="divider"></li>    
                             <li>

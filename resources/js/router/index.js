@@ -5,9 +5,25 @@ import Role from "../components/Pages/Roles.vue";
 import Permission from "../components/Pages/Permissions.vue";
 import Example from "../components/ExampleComponent.vue";
 import User from "../components/Pages/Users.vue";
+import Profile from "../components/Pages/Profile.vue";
+import Dashboard from "../components/Dashboard.vue";
 
 var admin_prefix = '/admin';
 const routes = [
+  {
+    path: '/dashboard',
+    name: "dashboard",
+    components:{
+      backend : Dashboard
+    }
+  },
+  {
+    path: admin_prefix+"/profile",
+    name: "profile",
+    components:{
+      backend : Profile
+    }
+  },
   {
     path: admin_prefix+"/roles",
     name: "roles",

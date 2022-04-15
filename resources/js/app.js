@@ -37,6 +37,9 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 //router import
 import { router } from "./router/index";
 
+//store import
+import { store } from "./store/index";
+
 // /*Sweet alert start*/
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -116,7 +119,12 @@ app.use(VueProgressBar, option)
 import Gate from "./Gate";
 //global gate
 
+import Functions from "./functions";
+
+
 app.config.globalProperties.$gate = new Gate(window.user);
+app.config.globalProperties.$function = new Functions(app);
+
 
 /*End of ACL authontication*/
 /*Start of Custom Event Listner Vue - Fires an event after a change*/
@@ -126,5 +134,6 @@ app.config.globalProperties.emitter = emitter;
 
 
 app.use(router)
+app.use(store)
     
 app.mount('#app')

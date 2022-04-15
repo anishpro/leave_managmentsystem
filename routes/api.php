@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::group(
     ['middleware' => 'auth:api','namespace'=>'Api\\'],
     function () {
@@ -24,9 +25,15 @@ Route::group(
         Route::apiResources(['role'         =>'RoleController']);
 
         Route::apiResources(['permission'   =>'PermissionController']);
+        Route::post('updatePassword', 'ProfileController@updatePassword');
+
+        Route::apiResources(['profile'      =>'ProfileController']);
 
         // Route::apiResources(['profile'      =>'ProfileController']);
         Route::get('auth_permissions', [PermissionController::class, 'authPermissions']);
         Route::get('auth_roles', [RoleController::class, 'authRoles']);
+        Route::get('auth_user', function () {
+            return auth()->user()->with('profile')->first();
+        });
     }
 );
