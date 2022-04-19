@@ -15,7 +15,6 @@
                                 <span>Change Profile</span>
                             </label>
                             <input id="file" type="file"  @change="$function.imageUpload($event, form ,'profile')" name="profile" class="form-input">
-
                             <img v-if="form.profile != null"   class="profile-user-img img-fluid img-circle" :src="getProfilePhoto()" alt="User profile picture">
                             <img  v-if="form.profile == null" src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y" id="output" width="200" />
                             </div>

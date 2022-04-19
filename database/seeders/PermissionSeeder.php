@@ -22,6 +22,8 @@ class PermissionSeeder extends Seeder
             Permission::create(['name' => 'update_'.$item,'guard_name'=>'api']);
             Permission::create(['name' => 'delete_'.$item,'guard_name'=>'api']);
         }
+        Permission::create(['name' => 'update_users','guard_name'=>'api']);
+        Permission::create(['name' => 'update_supervisee','guard_name'=>'api']);
     }
     public function getData()
     {
@@ -29,6 +31,7 @@ class PermissionSeeder extends Seeder
            'permission',
            'role',
            'user',
+           ''
        ];
     }
 }

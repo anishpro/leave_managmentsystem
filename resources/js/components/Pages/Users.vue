@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <h6>Supervisor</h6>
-                                    <multiselect v-model="pform.supervisor_id"
+                                    <multiselect v-model="pform.supervisor"
                                         tag-placeholder="Select Supervisor"
                                         placeholder="Select Supervisor"
                                         label = "name"
@@ -173,7 +173,7 @@
                                         :allow-empty="false"
                                         :taggable="true">
                                     </multiselect>
-                                <has-error :form="pform" field="supervisor_id"></has-error>
+                                <has-error :form="pform" field="supervisor"></has-error>
                                 </div>
                             </div> 
                         </div>
@@ -229,7 +229,7 @@
                     duty_station:null,
                     group_id:null,
                     emp_code:null,
-                    supervisor_id:null,
+                    supervisor:null,
                 }),
                 api_url:null,
                 
@@ -384,8 +384,8 @@
                 }
             },
             async updateProfile() {
-                const response = await this.pform.put('/api/profile/'+this.pform.id);
                 try{
+                    const response = await this.pform.put('/api/admin_updated_profile/'+this.pform.id);
                     if(response.data.error == 'false'){
                         this.$swal(
                                 'Updated!',
@@ -405,7 +405,7 @@
                 }catch(error){
                     this.$swal(
                                 'Error!',
-                                'Something Went Wrong.',
+                                error.response.data.message,
                                 'warning'
                             )
                     this.$Progress.fail();
