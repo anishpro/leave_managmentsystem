@@ -9,7 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
     protected $table = 'employees';
-    protected $fillable = ['user_id','supervisor_id','emp_code','group_id','address','name','email','position','duty_station','signature','profile','phone',
+    protected $fillable = ['user_id','supervisor','emp_code','group_id','address','name','email','position','duty_station','signature','profile','phone',
     ];
 
     public function user()
@@ -19,6 +19,6 @@ class Employee extends Model
 
     public function supervisor()
     {
-        return $this->belongsTo(User::class, 'supervisor_id', 'id');
+        return $this->belongsTo(User::class, 'id', 'supervisor');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RoleController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,6 +36,10 @@ Route::group(
         Route::get('auth_roles', [RoleController::class, 'authRoles']);
         Route::get('auth_user', function () {
             return User::where('id', auth()->user()->id)->with('profile')->first();
+        });
+
+        Route::group(['middleware' => ['permission:update_profile']], function () {
+            Route::put('admin_updated_profile/{id}', [ProfileController::class, 'adminUpdatedProfile']);
         });
     }
 );

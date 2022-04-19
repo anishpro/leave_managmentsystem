@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DutyStation;
 use App\Models\Group;
 use App\Models\User;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -73,15 +74,25 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $user = User::findOrFail($id);
-
+            if (auth()->user()->hasPermissionTo('update_users')) {
+                $user  = User::findOrFail($id);
+            } elseif (auth()->user()->hasPermissionTo('update_supervisee')) {
+                try {
+                    $user = User::where('id', $id)->whereHas('profile', function ($query) {
+                        $query->where('supervisor', auth()->user()->id);
+                    })->firstOrFail();
+                } catch (\Exception $e) {
+                    return response()->json(['error' => 'You are not allowed to update this user'], 500);
+                }
+            }
             /*If user change the password*/
             if (!empty($request->password)) {
                 $request->merge(['password' => Hash::make($request['password'])]);
             }
+            
             $user->update($request->all());
             $user->syncRoles($request['roles']);
-            
+
             $data['error']='false';
             $data['message']='User Info! Has Been Updated';
         } catch (\Exception $exception) {

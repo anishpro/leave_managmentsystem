@@ -88,7 +88,7 @@
                         <span class="hide-menu">Dashboard </span> 
                     </a>
                 </li> 
-                @role('admin|super-admin|super-dev')
+                @role('admin|super-admin|super-dev|supervisor')
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="fas fa-hard-hat orange nav-icon"></i>

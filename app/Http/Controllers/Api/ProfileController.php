@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Hash;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 
 class ProfileController extends BaseController
@@ -124,5 +125,28 @@ class ProfileController extends BaseController
             $response['message'] = 'Old Password doesnt matched';
             return $response;
         }
+    }
+
+    public function adminUpdatedProfile(Request $request, $id)
+    {
+        $path =  $this->folder_path.DIRECTORY_SEPARATOR.$request->user_id;
+        parent::checkFolderExist($path);
+        try {
+            if (!$request->emp_code) {
+                $request['emp_code'] = parent::getRandId();
+            }
+            try {
+                Employee::updateOrCreate(['id' => $request->id], $request->all());
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
+
+            $data['error']='false';
+            $data['message']='Your Profile Info! Has Been Updated';
+        } catch (\Exception $e) {
+            $data['error']='true';
+            $data['message']=$e->getMessage();
+        }
+        return $data;
     }
 }
