@@ -14,7 +14,6 @@ import { faHatWizard } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faHatWizard)
-import VueGates from 'vue-gates';
 
 require('./bootstrap');
 import { createApp } from 'vue'
@@ -29,7 +28,6 @@ const app = createApp({
 })
 
 
-app.use(VueGates);
 
 
 app.component('font-awesome-icon', FontAwesomeIcon)
@@ -122,7 +120,6 @@ import Gate from "./Gate";
 import Functions from "./functions";
 
 
-app.config.globalProperties.$gate = new Gate(window.user);
 app.config.globalProperties.$function = new Functions(app);
 
 
@@ -135,5 +132,8 @@ app.config.globalProperties.emitter = emitter;
 
 app.use(router)
 app.use(store)
+import VueGates from 'vue-gates';
+
+app.use(VueGates,{superRole:null,persistent: true});
     
 app.mount('#app')

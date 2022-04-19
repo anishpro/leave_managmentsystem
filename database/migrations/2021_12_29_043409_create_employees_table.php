@@ -20,7 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('name');
             $table->Integer('position')->nullable()->foreign('position')->references('employee_positions')->on('id')->onDelete('cascade');
             $table->Integer('duty_station')->nullable()->foreign('duty_station')->references('duty_stations')->on('id')->onDelete('cascade');
-            $table->bigInteger('phone');
+            $table->bigInteger('phone')->nullable();
             $table->string('email')->unique();
             $table->text('address')->nullable();
             $table->text('signature')->nullable();

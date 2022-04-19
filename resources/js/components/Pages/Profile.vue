@@ -188,7 +188,7 @@ import Multiselect from 'vue-multiselect'
         
         methods: {
             getImage(img){
-                if(img) return "/images/users/"+this.form.id +"/" + img;
+                if(img) return "/images/users/"+this.form.user_id +"/" + img;
                 return "/images/no-image.png"
             },
             check(){
@@ -203,7 +203,7 @@ import Multiselect from 'vue-multiselect'
             },
             getProfilePhoto(){
                 if(this.form.profile != null){
-                     let photo = (this.form.profile.length > 200) ? this.form.profile : "/images/users/"+this.form.id +"/thumbs/"+ 'small_'+this.form.profile;
+                     let photo = (this.form.profile.length > 200) ? this.form.profile : "/images/users/"+this.form.user_id +"/thumbs/"+ 'small_'+this.form.profile;
                 return photo;
                 }
             },

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\RoleController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +34,7 @@ Route::group(
         Route::get('auth_permissions', [PermissionController::class, 'authPermissions']);
         Route::get('auth_roles', [RoleController::class, 'authRoles']);
         Route::get('auth_user', function () {
-            return auth()->user()->with('profile')->first();
+            return User::where('id', auth()->user()->id)->with('profile')->first();
         });
     }
 );

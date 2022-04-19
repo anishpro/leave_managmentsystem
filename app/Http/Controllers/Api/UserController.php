@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\DutyStation;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -26,9 +28,11 @@ class UserController extends Controller
     public function index()
     {
         $data=[];
-        $data['data']=$this->user->with('roles:name')->latest()->paginate(1);
+        $data['data']=$this->user->with('roles:name', 'profile')->latest()->paginate(1);
         $data['roles'] = Role::select('name', 'id')->get();
-
+        $data['groups'] = Group::pluck('group_name', 'id');
+        $data['duty_stations'] = DutyStation::pluck('work_place', 'id');
+        $data['supervisors'] = User::role('supervisor')->pluck('name', 'id');
         return $data;
     }
 
@@ -40,9 +44,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-        $user = User::create($input);
+        $request['password'] = Hash::make($request['password']);
+        $request['is_verified'] = 1;
+        $user = User::create($request->all());
         $user->assignRole($request['roles']);
 
         return response()->json($user);
@@ -77,7 +81,7 @@ class UserController extends Controller
             }
             $user->update($request->all());
             $user->syncRoles($request['roles']);
-
+            
             $data['error']='false';
             $data['message']='User Info! Has Been Updated';
         } catch (\Exception $exception) {
