@@ -24,6 +24,7 @@ class RoleSeeder extends Seeder
         $superDev = Role::create(['name' => 'super-dev','guard_name'=>'api']);
         $admin = Role::create(['name' => 'admin','guard_name'=>'api']);
         $applicant = Role::create(['name' => 'applicant','guard_name'=>'api']);
+        $supervisor = Role::create(['name' => 'supervisor','guard_name'=>'api']);
 
         $demo_user = User::find(1);
         $demo_user->assignRole($applicant);
@@ -33,6 +34,13 @@ class RoleSeeder extends Seeder
             'email' => 'sahumagain@gmail.com',
             'password' => Hash::make('password'),
         ]);
+        $user1 = \App\Models\User::factory()->create([
+            'name' => 'Super User',
+            'email' => 'supervisor@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        $user1->assignRole($supervisor);
 
         $user->assignRole($superDev);
     }

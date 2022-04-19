@@ -14,7 +14,6 @@ import { faHatWizard } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faHatWizard)
-import VueGates from 'vue-gates';
 
 require('./bootstrap');
 import { createApp } from 'vue'
@@ -29,13 +28,15 @@ const app = createApp({
 })
 
 
-app.use(VueGates);
 
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 //router import
 import { router } from "./router/index";
+
+//store import
+import { store } from "./store/index";
 
 // /*Sweet alert start*/
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -66,11 +67,6 @@ import {
   app.component(AlertError.name, AlertError)
   app.component(AlertErrors.name, AlertErrors)
   app.component(AlertSuccess.name, AlertSuccess)
-
-
-import LaravelVuePagination from 'laravel-vue-pagination';
-
-app.component('pagination', require('laravel-vue-pagination'));
 
 app.component( 'not-found',require('./components/Pages/NotFoundPage.vue').default);
 
@@ -121,7 +117,11 @@ app.use(VueProgressBar, option)
 import Gate from "./Gate";
 //global gate
 
-app.config.globalProperties.$gate = new Gate(window.user);
+import Functions from "./functions";
+
+
+app.config.globalProperties.$function = new Functions(app);
+
 
 /*End of ACL authontication*/
 /*Start of Custom Event Listner Vue - Fires an event after a change*/
@@ -131,5 +131,9 @@ app.config.globalProperties.emitter = emitter;
 
 
 app.use(router)
+app.use(store)
+import VueGates from 'vue-gates';
+
+app.use(VueGates,{superRole:null,persistent: true});
     
 app.mount('#app')

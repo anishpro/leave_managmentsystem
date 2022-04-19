@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +19,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             PermissionSeeder::class,
     ]);
+
+        // $path = public_path().'/sql/groups.sql';
+        // DB::unprepared(file_get_contents($path));
+        // $this->command->info('Group table seeded!');
     }
 }
