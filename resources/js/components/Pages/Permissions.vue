@@ -1,13 +1,13 @@
 <template>
+    <breadcrumb :items="breadcrumb_items" :icon="'bx-layers-plus'" :title="'Permissions'"></breadcrumb>
     <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Permission Management</h3>
-
-                        <div class="card-tools">
-                            <button type="" class="btn btn-primary" @click="newModal"><font-awesome-icons icon="HatWizard" /> Add New Permission</button>
+                    <div class="card-header d-flex justify-content-between p-3">
+                        <h3 class="card-title">Permission list</h3>
+                        <div class="card-tools float-right">
+                            <a href="#" type="" class="" @click="newModal"><i class="bx  bx-sm align-middle m-b-3 bx-layer-plus" /> </a>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -25,10 +25,10 @@
                                 <td>{{permission.name}}</td>
                                 <td>{{permission.guard_name}}</td>
                                 <td>
-                                    <a href="#" @click="editModal(permission)" class="btn btn-sm btn-success">Edit
+                                    <a href="#" @click="editModal(permission)" class="mr-3">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="#" @click="deletePermission(permission.id,permission.name)" class="btn btn-sm btn-danger">Delete
+                                    <a href="#" @click="deletePermission(permission.id,permission.name)" class="">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
@@ -89,16 +89,15 @@
     </div>
 </template>
 
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>
 
 <script>
-
+    import Breadcrumb from "../Breadcrumb/Breadcrumb.vue";
     import Multiselect from 'vue-multiselect'
     import Form from 'vform'
     import { Button, HasError, AlertError } from 'vform/src/components/bootstrap5'
 
     export default {
-        components: { Multiselect,HasError },
+        components: { Multiselect,HasError,Breadcrumb},
         data(){
             return {
                 selected: false,
@@ -111,6 +110,16 @@
                     name :'',
                     guard_name :'',
                 }),
+                breadcrumb_items:[
+                    {
+                        text: 'Home',
+                        href: '/home',
+                    },
+                    {
+                        text: 'Permissions',
+                        active: true,
+                    },
+                ],
             }
         },
         methods:{
@@ -257,3 +266,4 @@
 
     }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

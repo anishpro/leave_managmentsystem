@@ -85,6 +85,7 @@ class RoleController extends Controller
             $role->update();
 
             $permissions= $request['permissions'];
+            dd($permissions);
             $role->syncPermissions($permissions);
 
             $data['message']='Role Info! Has Been Updated';

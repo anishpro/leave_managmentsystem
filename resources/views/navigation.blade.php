@@ -5,6 +5,8 @@
             <router-link :to="{name:'dashboard'}" class="navbar-brand">
                 <span class="align-middle text-white f-s-20 text-capitalize f-w-500">LeaveManagement</span> 
             </router-link>
+
+
             
         </div>
                         
@@ -16,13 +18,23 @@
 
                 <li class="nav-item">
                     <a class="nav-link sidebartoggler hidden-sm-down text-muted" href="javascript:void(0)"><i class="bx bx-menu"></i></a>
-                </li>           
+                </li>  
+                         
             </ul>
+            
+            <ul class="navbar-nav my-lg-0 d-flex align-items-center align-center">
+                <li class="nav-item">
+                    <a class="nav-link  pt-0 pb-0" placement="bottom" tooltip="Logout"  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="bx bx-log-out"></i> 
+                    </a>
 
-            <ul class="navbar-nav my-lg-0">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
                 <!-- Notification -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted text-muted" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                    <a class="nav-link pt-0 pb-0 dropdown-toggle text-muted text-muted"  href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <span class="bx bxs-bell"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right mailbox">
@@ -43,36 +55,23 @@
                             </li>
                         </ul>
                     </div>
-                </li> 
+                </li>
+               
 
-                <!-- Profile -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="bx bxs-user-circle"></span> {{ucwords(session()->get('USERNAME'))}}
-                    </a> 
+                
+                <li class="nav-item d-flex align-items-center align-center">
+                    <router-link class="nav-link pt-0 pb-0 text-muted " data-placement="bottom" tooltip="Profile"  :to="{name:'profile'}" >
+                        <i class="bx bxs-user-circle"></i> 
+                    </router-link>
+                    <div>
 
-                    <div class="dropdown-menu dropdown-menu-right"> 
-                        <ul class="dropdown-user">
-                            <li>
-                                <router-link :to="{name:'profile'}" >
-                                    <i class="bx bx-user f-s-16 align-middle"></i> Profile
-                                </router-link>
-                            </li>
-                            <li><a href="change_password.php"><i class="bx bx-lock f-s-16 align-middle"></i> Change Password</a></li>
-                            <li role="separator" class="divider"></li>    
-                            <li>
-                                <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="bx bx-log-out-circle f-s-16 align-middle"></i> {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
+                        <h5>{{auth()->user()->name}}</h5> 
+                        <h6>{{auth()->user()->roles[0]->name}}</h6> 
                     </div>
+
                 </li>
             </ul>
+            
         </div>
     </nav>
 </div><!-- /.header -->  

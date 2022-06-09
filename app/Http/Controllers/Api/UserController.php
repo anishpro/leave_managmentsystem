@@ -29,7 +29,11 @@ class UserController extends Controller
     public function index()
     {
         $data=[];
-        $data['data']=$this->user->with('roles:name', 'profile')->latest()->paginate(1);
+        $data['data']= $this->user->with('roles:name', 'profile')
+        // ->whereHas('profile', function ($q) {
+        //     $q->where('supervisor', auth()->user()->id);
+        // })
+        ->latest()->paginate(4);
         $data['roles'] = Role::select('name', 'id')->get();
         $data['groups'] = Group::pluck('group_name', 'id');
         $data['duty_stations'] = DutyStation::pluck('work_place', 'id');

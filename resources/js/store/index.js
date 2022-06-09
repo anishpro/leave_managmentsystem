@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
 
-import VueGates from 'vue-gates';
 
 // Create a new store instance.
 export const store = createStore({
