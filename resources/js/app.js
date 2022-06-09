@@ -134,6 +134,6 @@ app.use(router)
 app.use(store)
 import VueGates from 'vue-gates';
 
-app.use(VueGates,{superRole:null,persistent: true});
+app.use(VueGates,{persistent: true});
     
 app.mount('#app')

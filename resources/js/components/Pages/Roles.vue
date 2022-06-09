@@ -1,13 +1,13 @@
 <template>
+    <breadcrumb :items="breadcrumb_items" :icon="'bx-layers-plus'" :title="'Roles'"></breadcrumb>
     <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Role Management</h3>
-
-                        <div class="card-tools">
-                            <button type="" class="btn btn-primary" @click="newModal"><i class="fa fa-user-plus fa-fw"></i>Add New Role</button>
+                    <div class="card-header d-flex justify-content-between p-3">
+                        <h3 class="card-title">Role list</h3>
+                        <div class="card-tools float-right">
+                            <a href="#" type="" class="" @click="newModal"><i class="bx  bx-sm align-middle m-b-3 bx-layer-plus" /> </a>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -25,10 +25,10 @@
                                 <td>{{role.name}}</td>
                                 <td>{{role.guard_name}}</td>
                                 <td>
-                                    <a href="#" @click="editModal(role)" class="btn btn-sm btn-success">Edit
+                                    <a href="#" @click="editModal(role)" class="mr-3">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="#" @click="deleteRole(role.id,role.name)" class="btn btn-sm btn-danger">Delete
+                                    <a href="#" @click="deleteRole(role.id,role.name)" class="">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
@@ -99,16 +99,16 @@
     </div>
 </template>
 
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>
 
 <script>
     import Multiselect from 'vue-multiselect'
     import Form from 'vform'
     import { Button, HasError, AlertError } from 'vform/src/components/bootstrap5'
+    import Breadcrumb from '../Breadcrumb/Breadcrumb.vue'
 
 
     export default {
-        components: { Multiselect,HasError },
+        components: { Multiselect,HasError,Breadcrumb },
         data(){
             return {
                 selected: false,
@@ -123,6 +123,17 @@
                     guard_name :'',
                     permissions:'',
                 }),
+                breadcrumb_items:[
+                    {
+                        text: 'Home',
+                        href: '/home',
+                    },
+                    {
+                        text: 'Roles',
+                        active: true,
+                    },
+                ],
+
             }
         },
         methods:{
@@ -271,3 +282,4 @@
         }
     }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

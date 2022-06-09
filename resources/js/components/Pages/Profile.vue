@@ -151,6 +151,7 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
+import { mapActions } from 'vuex'
 
     import Form from 'vform'
     import { Button, HasError, AlertError } from 'vform/src/components/bootstrap5'
@@ -272,17 +273,22 @@ import Multiselect from 'vue-multiselect'
             },
             async loadProfile(){
                 if(!this.auth_user ){
-                    await this.$store.dispatch("fetchAuthUser");
+                    await this.fetchAuthUser();
                 }
+                //filling the form with the profile data
                 this.auth_user = this.$store.state.auth_user
                 if(this.$store.state.auth_user.profile){
-                        this.form.fill(this.$store.state.auth_user.profile);
+                    this.form.fill(this.$store.state.auth_user.profile);
                 }else{
+                    //filling form from user data
                     this.form.name = this.auth_user.name;
                     this.form.email = this.auth_user.email;
                     this.form.user_id = this.auth_user.id;
                 }
-            }
+            },
+            ...mapActions([
+            'fetchAuthUser', 
+            ]),
         },
         created() {
             this.loadProfile();

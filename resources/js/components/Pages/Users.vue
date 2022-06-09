@@ -3,7 +3,7 @@
         <div class="row pt-5" >
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between p-2">
                         <h3>User Management</h3>
 
                         <div class="card-tools">
@@ -12,7 +12,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
-                        <table class="table table-hover">
+                        <table class="table table-hover m-0">
                             <tbody>
                             <tr class="bg-light">
                                 <th>S.N.</th>
@@ -444,5 +444,6 @@
 box-shadow: 0 0 0 0.2rem rgb(73 231 25 / 25%) !important;
 }
 </style>
+
 
 
