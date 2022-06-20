@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GroupController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RoleController;
@@ -41,5 +42,17 @@ Route::group(
         Route::group(['middleware' => ['permission:update_profile']], function () {
             Route::put('admin_updated_profile/{id}', [ProfileController::class, 'adminUpdatedProfile']);
         });
+
+        Route::resource('/designations', DesignationController::class);
+        Route::resource('/pillars', PillarController::class);
+        Route::resource('/staff-categories', StaffCategoryController::class);
+        Route::resource('/staff-types', StaffTypeController::class);
+        Route::resource('/course-categories', CourseCategoryController::class);
+
+        Route::apiResources(['groups' =>'GroupController']);
+        Route::apiResources(['leave-types' =>'LeaveTypeController']);
+        Route::get('choice_role', [RoleController::class, 'choice']);
+        Route::get('choice_group', [GroupController::class, 'choice']);
+        Route::get('choice_permission', [PermissionController::class, 'choice']);
     }
 );

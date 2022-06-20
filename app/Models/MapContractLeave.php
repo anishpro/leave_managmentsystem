@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MapContractLeave extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['leave_type_id','contract_month','leave_days'];
 }

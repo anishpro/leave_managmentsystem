@@ -39,7 +39,7 @@ class BaseController extends Controller
         Image::make($photo)->save($path.'/'. $name);
         Image::make($photo)->resize(1024, 700)->save($path.'/thumbs/'.'big_'.$name);//resize image
         Image::make($photo)->resize(100, 100)->save($path.'/thumbs/'.'small_'.$name);//resize image
-        return $path.'/'. $name;
+        return '/'.$path.'/'. $name;
     }
     public function getRandId()
     {

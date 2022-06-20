@@ -5,7 +5,7 @@
         <div class="card" v-role="'super-dev'">
           <div class="card-header">admin Component</div>
         </div>
-          <div class="card" v-role="'applicant'">
+          <div class="card" v-role="'supervisor'">
           <div class="card-header">applicant Component</div>
         </div>
       </div>
@@ -27,11 +27,6 @@
 // }
 // };
 export default {
-  async mounted() {
-   await this.$store.dispatch("fetchAuthUserRoles");
-    await this.$store.dispatch("fetchAuthUserPermissions");
-    this.$gates.setPermissions(this.$store.state.permissions);
-    this.$gates.setRoles(this.$store.state.roles);
-  }
+  
 };
 </script>

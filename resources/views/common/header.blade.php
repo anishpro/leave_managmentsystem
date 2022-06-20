@@ -12,14 +12,14 @@
 
     <!-- Core CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/bootstrap-select/dist/css/bootstrap-select.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/DataTables/datatables.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/DataTables/Responsive/css/responsive.bootstrap4.min.css')}}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/bootstrap-select/dist/css/bootstrap-select.css')}}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/DataTables/datatables.css')}}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/DataTables/Responsive/css/responsive.bootstrap4.min.css')}}"> --}}
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/helper.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/bootstrap_datetime_picker/bootstrap-datetimepicker.min.css')}}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/plugins/bootstrap_datetime_picker/bootstrap-datetimepicker.min.css')}}"> --}}
 
     <!-- Jquery -->
     <script type="text/javascript" src="{{asset('admin_assets/plugins/jquery/jquery-3.2.1.min.js')}}"></script>

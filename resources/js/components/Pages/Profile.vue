@@ -15,7 +15,7 @@
                                 <span>Change Profile</span>
                             </label>
                             <input id="file" type="file"  @change="$function.imageUpload($event, form ,'profile')" name="profile" class="form-input">
-                            <img v-if="form.profile != null"   class="profile-user-img img-fluid img-circle" :src="getProfilePhoto()" alt="User profile picture">
+                            <img v-if="form.profile != null"   class="profile-user-img img-fluid img-circle" :src="form.profile" alt="User profile picture">
                             <img  v-if="form.profile == null" src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=identicon&f=y" id="output" width="200" />
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                                         <div class="form-group col-md-4">
                                             <label for="photo" class="control-label">Signature Image *</label>
                                                 <input type="file" accept="image/png" id="signature" @change="$function.imageUpload($event, form ,'signature')"  class="form-control">
-                                                <img class="img-lg mb-3 elevation-3 float-right"  :src="(this.form.signature && this.form.signature.length > 50) ? form.signature : getImage(form.signature)"/>
+                                                <img class="img-lg mb-3 elevation-3 float-right"  :src="form.signature"/>
                                             <has-error :form="form" field="signature"></has-error>
                                         </div>
 
@@ -187,10 +187,7 @@ import { mapActions } from 'vuex'
         },
         
         methods: {
-            getImage(img){
-                if(img) return "/images/users/"+this.form.user_id +"/" + img;
-                return "/images/no-image.png"
-            },
+           
             check(){
                 if(this.form.newpassword == this.form.confirmpassword){
                     this.isActive = false ;
@@ -201,12 +198,7 @@ import { mapActions } from 'vuex'
                     this.fc = false;
                 }
             },
-            getProfilePhoto(){
-                if(this.form.profile != null){
-                     let photo = (this.form.profile.length > 200) ? this.form.profile : "/images/users/"+this.form.user_id +"/thumbs/"+ 'small_'+this.form.profile;
-                return photo;
-                }
-            },
+            
             updatePassword() {
                 this.$Progress.start();
                 if(this.form.newpassword == this.form.confirmpassword){

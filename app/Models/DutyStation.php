@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DutyStation extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['work_place'];
 }

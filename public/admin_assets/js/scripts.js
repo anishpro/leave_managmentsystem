@@ -35,16 +35,7 @@ $(function() {
         $(".app-search").slideToggle(200);
     }),
 
-    $(".floating-labels .form-control").on("focus blur", function(i) {
-        $(this).parents(".form-group").toggleClass("focused", "focus" === i.type || this.value.length > 0);
-    }).trigger("blur"), $(function() {
-        for (var i = window.location, o = $("ul#sidebarnav a").filter(function() {
-            return this.href == i;
-        }).addClass("active").parent().addClass("active");;) {
-            if (!o.is("li")) break;
-            o = o.parent().addClass("in").parent().addClass("active");
-        }
-    }),
+    
 
     $(function() {
         $("#sidebarnav").metisMenu();

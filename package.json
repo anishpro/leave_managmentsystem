@@ -30,7 +30,7 @@
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "@fortawesome/free-regular-svg-icons": "^6.1.1",
         "@fortawesome/free-solid-svg-icons": "^6.1.1",
-        "@fortawesome/vue-fontawesome": "^3.0.0-1",
+        "@fortawesome/vue-fontawesome": "^3.0.0",
         "laravel-vue-pagination": "^3.0.0",
         "mitt": "^3.0.0",
         "sweetalert2": "^11.4.8",
@@ -40,6 +40,7 @@
         "vue-multiselect": "^3.0.0-alpha.2",
         "vue-router": "^4.0.14",
         "vue-sweetalert2": "^5.0.2",
-        "vuex": "^4.0.2"
+        "vuex": "^4.0.2",
+        "vuex-persistedstate": "^4.1.0"
     }
 }

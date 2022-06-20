@@ -28,17 +28,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $data=[];
-        $data['data']= $this->user->with('roles:name', 'profile')
+        return $this->user->with('roles:name', 'profile')
         // ->whereHas('profile', function ($q) {
         //     $q->where('supervisor', auth()->user()->id);
         // })
         ->latest()->paginate(4);
-        $data['roles'] = Role::select('name', 'id')->get();
-        $data['groups'] = Group::pluck('group_name', 'id');
-        $data['duty_stations'] = DutyStation::pluck('work_place', 'id');
-        $data['supervisors'] = User::role('supervisor')->pluck('name', 'id');
-        return $data;
+        // $data['roles'] = Role::select('name', 'id')->get();
+        // $data['supervisors'] = User::role('supervisor')->pluck('name', 'id');
     }
 
     /**
@@ -95,7 +91,11 @@ class UserController extends Controller
             }
             
             $user->update($request->all());
-            $user->syncRoles($request['roles']);
+            $roles = [];
+            foreach ($request->roles as $role) {
+                array_push($roles, $role['name']);
+            }
+            $user->syncRoles($roles);
 
             $data['error']='false';
             $data['message']='User Info! Has Been Updated';

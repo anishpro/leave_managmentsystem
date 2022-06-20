@@ -19,6 +19,7 @@ class CreatePublicHolidaysTable extends Migration
             $table->text('description')->nullable();
             $table->date('leave_date');
             $table->string('group_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -16,15 +16,13 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('emp_code')->unique();
-            $table->Integer('group_id')->nullable()->foreign('group_id')->references('groups')->on('id')->onDelete('cascade');
             $table->string('name');
-            $table->Integer('position')->nullable()->foreign('position')->references('employee_positions')->on('id')->onDelete('cascade');
-            $table->Integer('duty_station')->nullable()->foreign('duty_station')->references('duty_stations')->on('id')->onDelete('cascade');
             $table->bigInteger('phone')->nullable();
             $table->string('email')->unique();
             $table->text('address')->nullable();
             $table->text('signature')->nullable();
             $table->text('profile')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

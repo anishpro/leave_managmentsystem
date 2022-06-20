@@ -5,7 +5,7 @@
         <div class="card" v-role="'super-dev'">
           <div class="card-header">admin Component</div>
         </div>
-        <div class="card" v-role="'applicant'">
+        <div class="card" v-role="'supervisor'">
           <div class="card-header">applicant Component</div>
         </div>
       </div>
@@ -14,20 +14,39 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 
+  import { mapActions } from 'vuex'
 export default {
-
-  setup(){
-    const auth_user = ref('');
-
-    return {
-      auth_user,
-    };
+  
+  data(){
+    return{
+      user:null,
+    }
   },
-  async mounted() {
-    await this.$store.dispatch("fetchAuthUser");
-    this.auth_user = this.$store.state.auth_user;     
-  }
-};
+
+  methods: {
+    ...mapActions([
+      'fetchAuthUser',
+      'fetchAuthUserRoles',
+      'fetchAuthUserPermissions',
+      'fetchOptions'
+    ]),
+    setACL(){
+        this.$gates.setPermissions(this.$store.state.auth_permissions);
+        this.$gates.setRoles(this.$store.state.auth_roles);
+    },
+    async call(){
+        await this.fetchAuthUser();
+        await this.fetchAuthUserRoles();
+        await this.fetchAuthUserPermissions();
+        await this.fetchOptions();
+        this.setACL();
+      },
+  },
+  created() {
+    this.call();
+  },
+
+
+}
 </script>

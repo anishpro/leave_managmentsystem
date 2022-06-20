@@ -195,9 +195,9 @@ Route::group(['middleware'=>'auth'], function () {
     //LEAVE REPORT
     Route::get('leave_report', [LeaveApplicationController::class, 'leaveReport']);
     Route::get('/leavereport_pdf/pdf/{id}/{leave_type}', [LeaveApplicationController::class, 'pdfReport']);
+    Route::get('/admin/{path}', [AdminController::class, 'dashboard'])->where('path', '([A-z\/_.\d-]+)?');
 });
 
 //auth routes
 Auth::routes();
 Auth::routes(['verify' => true]);
-Route::get('/admin/{path}', [AdminController::class, 'dashboard'])->where('path', '([A-z\/_.\d-]+)?');

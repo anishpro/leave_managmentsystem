@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class LeaveType extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['leave_type','mapping_required'];
+
+    public function mapContractLeave()
+    {
+        return $this->hasMany(MapContractLeave::class);
+    }
 }
