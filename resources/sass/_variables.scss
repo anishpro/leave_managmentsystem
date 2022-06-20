@@ -1,113 +1,43 @@
-// Body
-$body-bg: #f8fafc;
+//Colors
+$color-primary: #00205C;
+$color-primary-tint1: rgba(0,32,92,.65);
+$color-white: #FFFFFF;
+$color-grey: #F5F6FA;
+
+$color-sec-blue: #009ADE;
+$color-sec-blue-tint1: rgb(121,181,227);
+
+$color-sec-orange: #F26829;
+$color-sec-orange-tint1: rgb(252,188,113);
+
+$color-sec-yellow: #F4A81D;
+$color-sec-yellow-tint1: rgb(248,195,112);
+
+$color-sec-magenta: #A6228C;
+$color-sec-magenta-tint1: rgb(190,115,173);
+
+$color-sec-purple: #5B2C86;
+$color-sec-purple-tint1: rgb(174,169,212);
+
+$color-sec-green: #80BC00;
+$color-sec-green-tint1: rgb(170,207,127);
+
+$color-black: #000000;
+$color-red: #EF3842;
 
 // Typography
-$font-family-sans-serif: 'Arial', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$font-family-who: 'Source Sans Pro', sans-serif;
+$font-size-large: clamp(2.5rem, 2.1519rem + 1.3263vw, 3.75rem);
+$font-size-title: clamp(1.563rem, 1.3709rem + 0.8537vw, 2.438rem);
+$font-size-normal: clamp(0.75rem, 0.6951rem + 0.2439vw, 1rem);
 
-$font-color:#3c4245;
-$font-color-dark: #000;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
 
-$primary-color: #008dc9;
-
-//secondary colors
-$secondary-color: #3c9da6;
-$secondary-color-orange: #d86422;
-$secondary-color-green: #91c841;
-$secondary-color-light-orange: #f89f6b;
-$secondary-color-pink: #A76389;
+// Body
+$body-bg: $color-grey;
 
 
-// // Colors
-// $blue: #3490dc;
-// $indigo: #6574cd;
-// $purple: #9561e2;
-// $pink: #f66D9b;
-// $red: #e3342f;
-// $orange: #f6993f;
-// $yellow: #ffe600;
-// $green: #38c172;
-// $teal: #4dc0b5;
-// $cyan: #6cb2eb;
-// $black: #2d2d2d;
-
-// .blue{
-//   color:$blue;
-// }
-// .indigo{
-//   color:$indigo;
-// }
-// .purple{
-//   color:$purple;
-// }
-// .pink{
-//   color:$pink;
-// }
-// .red{
-//   color:$red;
-// }
-// .orange{
-//   color: $orange;
-// }
-// .yellow{
-//   color:$yellow;
-// }
-// .green{
-//   color:$green;
-// }
-// .teal{
-//   color:$teal;
-// }
-// .cyan{
-//   color:$cyan;
-// }
-// .black{
-//   color: $black;
-// }
 
 
-// .blue-bg{
-//     color:#fff;
-//     background-color:$blue;
-//   }
-//   .indigo-bg{
-//     color:#fff;
-//     background-color:$indigo;
-//   }
-//   .purple-bg{
-//     color:#fff;
-//     background-color:$purple;
-//   }
-//   .pink-bg{
-//     color:#fff;
-//     background-color:$pink;
-//   }
-//   .red-bg{
-//     color:#fff;
-//     background-color:$red;
-//   }
-//   .orange-bg{
-//     color:#fff;
-//     background-color: $orange;
-//   }
-//   .yellow-bg{
-//     color:#fff;
-//     background-color:$yellow;
-//   }
-//   .green-bg{
-//     color:#fff;
-//     background-color:$green;
-//   }
-//   .teal-bg{
-//     color:#fff;
-//     background-color:$teal;
-//   }
-//   .cyan-bg{
-//     color:#fff;
-//     background-color:$cyan;
-//   }
-//   .black-bg{
-//     color:#fff;
-//     background-color: $black;
-//   }
+

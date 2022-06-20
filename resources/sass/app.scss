@@ -3,6 +3,8 @@
 
 // Variables
 @import 'variables';
+$fa-font-path: "../webfonts";
+
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -14,5 +16,10 @@
 @import '~sweetalert2/src/sweetalert2';
 
 //font-awesome
+
+@import "./fontawesome/scss/fontawesome.scss";
+@import "./fontawesome/scss/solid.scss";
+@import "./fontawesome/scss/brands.scss";
+
 
 

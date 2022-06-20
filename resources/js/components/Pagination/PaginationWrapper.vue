@@ -29,13 +29,13 @@ export default {
             if(this.has_param){
                 axios.get('/'+this.api_url+'&page=' + page)
                     .then(response => {
-                        this.emitter.emit('paginating', response.data.data);
+                        this.emitter.emit('paginating', response.data);
                     });
             }
             else{
                 axios.get('/'+this.api_url+'?page=' + page)
                     .then(response => {
-                        this.emitter.emit('paginating', response.data.data);
+                        this.emitter.emit('paginating', response.data);
                     });
             }
         },

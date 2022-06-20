@@ -29,6 +29,10 @@ class PermissionController extends Controller
         $data['permissions']= $this->model->select('name', 'guard_name', 'id')->latest()->get();
         return response()->json($data);
     }
+    public function choice()
+    {
+        return $this->model->pluck('name', 'id');
+    }
 
     /**
      * Store a newly created resource in storage.

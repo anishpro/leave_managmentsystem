@@ -14,8 +14,7 @@ class AddUserIdToEmployeesTable extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->after('id')->constrained('users')->onDelete('RESTRICT');
-            $table->foreignId('supervisor_id')->nullable()->after('user_id')->constrained('users')->onDelete('RESTRICT');
+            $table->foreignId('user_id')->nullable()->after('id')->constrained('users')->onDelete('cascade');
         });
     }
 

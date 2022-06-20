@@ -1,30 +1,24 @@
 
-<div class="header is_stuck">
-    <nav class="navbar top-navbar navbar-expand-md navbar-light"> 
+<div class="header  is_stuck">
+    <nav class="navbar top-navbar navbar-expand-md "> 
         <div class="navbar-header"> 
             <router-link :to="{name:'dashboard'}" class="navbar-brand">
                 <span class="align-middle text-white f-s-20 text-capitalize f-w-500">LeaveManagement</span> 
             </router-link>
-
-
-            
         </div>
                         
-        <div class="navbar-collapse">  
+        <div class="navbar-collapse ">  
             <ul class="navbar-nav mr-auto mt-md-0">
                 <li class="nav-item">
                     <a class="nav-link nav-toggler hidden-md-up text-muted" href="javascript:void(0)"><i class="bx bx-menu"></i></a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link sidebartoggler hidden-sm-down text-muted" href="javascript:void(0)"><i class="bx bx-menu"></i></a>
-                </li>  
-                         
+                </li>      
             </ul>
-            
             <ul class="navbar-nav my-lg-0 d-flex align-items-center align-center">
                 <li class="nav-item">
-                    <a class="nav-link  pt-0 pb-0" placement="bottom" tooltip="Logout"  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="nav-link  pt-0 pb-0" flow="down" tooltip="Logout"  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bx bx-log-out"></i> 
                     </a>
 
@@ -44,8 +38,6 @@
                             </li>
                             <li>
                                 <div class="message-center"> 
-                                    
-                                    
                                 </div>
                             </li> 
                             <li>
@@ -56,15 +48,11 @@
                         </ul>
                     </div>
                 </li>
-               
-
-                
-                <li class="nav-item d-flex align-items-center align-center">
-                    <router-link class="nav-link pt-0 pb-0 text-muted " data-placement="bottom" tooltip="Profile"  :to="{name:'profile'}" >
+                <li class="nav-item d-flex align-items-center text-center">
+                    <router-link class="nav-link pt-0 pb-0 text-muted " flow="down" tooltip="Profile"  :to="{name:'profile'}" >
                         <i class="bx bxs-user-circle"></i> 
                     </router-link>
-                    <div>
-
+                    <div class="profile-content"> 
                         <h5>{{auth()->user()->name}}</h5> 
                         <h6>{{auth()->user()->roles[0]->name}}</h6> 
                     </div>
@@ -82,100 +70,71 @@
             <ul id="sidebarnav">
                 <li class="nav-devider"></li>	  
                 <li class="nav-label">
-                    <a href="{{url('dashboard')}}" aria-expanded="false"> <!-- bx bx- -->
+                    <router-link :to="{name:'dashboard'}" aria-expanded="false">
                         <i class="bx bx-home-circle"></i>
                         <span class="hide-menu">Dashboard </span> 
-                    </a>
+                    </router-link>
                 </li> 
-                @role('admin|super-admin|super-dev|supervisor')
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-hard-hat orange nav-icon"></i>
-                        <p>
-                            Development Mode
-                            <i class="right fa fa-angle-left"></i>
-                        </p>
+                @role('super-admin')
+
+                <li>
+                    <a href="#" class="has-arrow" aria-expanded="false">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                       <span class="hide-menu">
+                            Settings
+                        </span>
                     </a>
-                    <ul class="nav nav-treeview pl-2">
+                    <ul aria-expanded="false" class="collapse">
                         <li class="nav-item">
-                            <router-link :to="{name:'roles'}" class="nav-link">
-                                <i class="nav-icon green fa fa-users-cog"></i>  Roles
+                            <router-link :to="{name:'groups'}" class="nav-link ">
+                                <i class="fa-solid fa-people-roof"></i>  Groups
                             </router-link>
                         </li>
                         <div class="dropdown-divider"></div>
                         <li class="nav-item">
-                            <router-link :to="{name:'permissions'}" class="nav-link">
-                                
-                                <i class="nav-icon gray fa fa-key"></i> Permissions
+                            <router-link :to="{name:'leave-types'}" class="nav-link ">
+                                <i class="fa-solid fa-person-walking-arrow-right"></i> Leave Types
                             </router-link>
                         </li>
-                        <div class="dropdown-divider"></div>
                     </ul>
                 </li> 
-                <li class="nav-label">
+
+                @endrole
+                @role('admin|super-admin|super-dev|supervisor')
+                <li>
+                    <a href="#" class="has-arrow" aria-expanded="false">
+                        <i class="fa fa-cogs orange nav-icon"></i>
+                        <span class="hide-menu">
+                            Development Mode
+                        </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li class="nav-item">
+                            <router-link :to="{name:'roles'}" class="nav-link ">
+                                <i class="nav-icon green fa fa-cog"></i>  Roles
+                            </router-link>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item">
+                            <router-link :to="{name:'permissions'}" class="nav-link ">
+                                
+                                <i class="nav-icon  fa fa-key"></i> Permissions
+                            </router-link>
+                        </li>
+                    </ul>
+                </li> 
+                <li >
                     <router-link :to="{name:'users'}" class="nav-link">
-                        <i class="nav-icon gray fa fa-users"></i> Users
+                        <i class="nav-icon  fa fa-users"></i> 
+                        <span class="hide-menu">
+                            Users
+                        </span> 
                     </router-link>
                 </li> 
                 
                 @endrole
 
-                <?php
-                    $sideMenu = showMenu();
-                    //print_r($sideMenu);
-                    $menuItem = '';
-
-                    foreach ($sideMenu as $key => $value) {
-                        //print_r($value['sub_menu']);
-                        if ($value['sub_menu']) {
-                            foreach ($value['sub_menu'] as $menu) {
-                                
-                                if(count($menu['sub_menu']) > 0){
-
-                                    $menuItem .= '<li> 
-                                                <a class="has-arrow" href="' . ($menu['menu_url'] ? url($menu['menu_url']) : 'javascript:void(0)') . '" aria-expanded="false"> 
-                                                    <i class="'.$value['icon_class'].'"></i> 
-                                                    <span class="hide-menu">'.$menu['menu_name'].'</span>
-                                                </a>';
-                                    $menuItem .= '<ul aria-expanded="false" class="collapse">';
-
-                                        foreach ($menu['sub_menu'] as $subMenu) {
-                                                                
-                                            $menuItem .= '<li>
-                                                        <a href="' . ($subMenu['menu_url'] ? url($subMenu['menu_url']) : 'javascript:void(0)') . '">'.$subMenu['menu_name'].'</a>
-                                                    </li>';
-                                            
-                                            //print_r($subMenu['menu_name']);
-                                        }
-
-                                    $menuItem .= '</ul>';
-                                    $menuItem .= '</li>'; 
-                                }else{
-                                    $menuItem .= '<li>
-                                                    <a href="' . ($menu['menu_url'] ? url($menu['menu_url']) : 'javascript:void(0)') . '" aria-expanded="false">
-                                                        <i class="bx bx-home-circle"></i>
-                                                        <span class="hide-menu">'.$menu['menu_name'].'</span>
-                                                    </a>
-                                                </li>';
-                                }
-                                
-                            }
-                        }
-                    }
-
-                    echo $menuItem;
-
-                ?>
-                <?php 
-                    if(session('ROLE') === 1){
-                        echo'<li>
-                                <a href="'.url('access_control').'" aria-expanded="false"> <!-- bx bx- -->
-                                    <i class="bx bx-home-circle"></i>
-                                    <span class="hide-menu">Access Control </span> 
-                                </a>
-                            </li>';
-                    }
-                ?>
+               
                 
             </ul>
         </nav><!-- /.sidebar-nav -->

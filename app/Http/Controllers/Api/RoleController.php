@@ -31,6 +31,10 @@ class RoleController extends Controller
             'permissions' => $data['permissions'],
         ]);
     }
+    public function choice()
+    {
+        return $this->model->select('name', 'id')->get();
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -85,7 +89,6 @@ class RoleController extends Controller
             $role->update();
 
             $permissions= $request['permissions'];
-            dd($permissions);
             $role->syncPermissions($permissions);
 
             $data['message']='Role Info! Has Been Updated';
