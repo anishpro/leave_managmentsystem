@@ -8,6 +8,11 @@ import User from "../components/Pages/Users.vue";
 import Profile from "../components/Pages/Profile.vue";
 import Group from "../components/Pages/Group.vue";
 import LeaveType from "../components/Pages/LeaveType.vue";
+import ContractLeave from "../components/Pages/MapLeaveTypeToContract.vue";
+import DutyStation from "../components/Pages/DutyStation.vue";
+
+import PublicHoliday from "../components/Pages/PublicHoliday.vue";
+import Designation from "../components/Pages/Designation.vue";
 
 import Dashboard from "../components/Dashboard.vue";
 
@@ -35,10 +40,38 @@ const routes = [
     }
   },
   {
+    path: admin_prefix+"/duty-stations",
+    name: "duty-stations",
+    components:{
+      backend : DutyStation
+    }
+  },
+  {
+    path: admin_prefix+"/designations",
+    name: "designations",
+    components:{
+      backend : Designation
+    }
+  },
+  {
     path: admin_prefix+"/leave-types",
     name: "leave-types",
     components:{
       backend : LeaveType
+    }
+  },
+  {
+    path: admin_prefix+"/contract-leaves",
+    name: "contract-leaves",
+    components:{
+      backend : ContractLeave
+    }
+  },
+  {
+    path: admin_prefix+"/public-holidays",
+    name: "public-holidays",
+    components:{
+      backend : PublicHoliday
     }
   },
 
@@ -77,8 +110,6 @@ const routes = [
       backend : Example
     }
   },
-  
-
 ];
 
 

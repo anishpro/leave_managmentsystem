@@ -16,6 +16,7 @@ class CreateDutyStationsTable extends Migration
         Schema::create('duty_stations', function (Blueprint $table) {
             $table->id();
             $table->string('work_place');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

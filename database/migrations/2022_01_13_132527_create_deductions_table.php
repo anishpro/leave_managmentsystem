@@ -17,6 +17,7 @@ class CreateDeductionsTable extends Migration
             $table->id();
             $table->string('deduction_item')->unique();
             $table->integer('deduction');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

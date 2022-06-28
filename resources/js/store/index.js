@@ -5,12 +5,14 @@ import createPersistedState from "vuex-persistedstate";
 export const store = createStore({
   plugins: [createPersistedState()],
   state () {
-    
+
     return {
       auth_user: null,
       auth_roles: [],
       auth_permissions: [],
       roles: [],
+      leave_types: [],
+      groups: [],
     }
   },
   mutations: {
@@ -23,7 +25,7 @@ export const store = createStore({
     setAuthUserPermission (state, permissions) {
       state.permissions = permissions
     },
-    setPillers (state, value) {
+    setPillars (state, value) {
       state.pillars = value
     },
     setRoles (state, value) {
@@ -47,11 +49,17 @@ export const store = createStore({
     setSupervisors (state, value) {
       state.supervisors = value
     },
+    setLeaveType(state, value) {
+        state.leave_types = value
+    },
+    setGroup(state, value) {
+        state.groups = value
+    },
   },
   actions: {
     async fetchAuthUser({ commit }) {
         try {
-          const data = await axios.get('/api/auth_user')
+          const data = await axios.get('/api/auth-user')
           console.log(data.data)
             commit('setAuthUser', data.data)
           }
@@ -61,7 +69,7 @@ export const store = createStore({
       },
     async fetchAuthUserRoles({ commit }) {
         try {
-          const data = await axios.get('/api/auth_roles')
+          const data = await axios.get('/api/auth-roles')
             commit('setAuthUserRole', data.data)
         this.$gates.setRoles(data.data);
           }
@@ -70,7 +78,7 @@ export const store = createStore({
     },
     async fetchAuthUserPermissions({ commit }) {
         try {
-          const data = await axios.get('/api/auth_permissions')
+          const data = await axios.get('/api/auth-permissions')
             commit('setAuthUserPermission', data.data)
             this.$gates.setPermissions(data.data);
           }
@@ -79,10 +87,15 @@ export const store = createStore({
     },
     async fetchOptions({ commit }) {
       try {
-        const data = await axios.get('/api/choice_role')
-          commit('setRoles', data.data)
+        const data = await axios.get('/api/choice-role')
+        commit('setRoles', data.data)
+
+        const group_choice = await axios.get('/api/choice-group')
+          commit('setGroup', group_choice.data)
+
+        const leave_choice = await axios.get('/api/choice-leave-type')
+          commit('setLeaveType', leave_choice.data)
         }
-        
         catch (error) {
     }
   }

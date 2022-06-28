@@ -13,17 +13,12 @@ class GroupHoliday extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('group_holidays')) {
-            Schema::create('group_holidays', function (Blueprint $table) {
-                // unsigned is needed for foreign key
-                $table->unsignedBigInteger('group_id');
-                $table->foreign('group_id')->references('id')->on('groups')->onDelete('restrict');
-                $table->unsignedBigInteger('holiday_id');
-                $table->foreign('holiday_id')->references('id')->on('public_holidays')->onDelete('restrict');
-                $table->primary(['group_id', 'holiday_id']);
-                $table->softDeletes();
-            });
-        }
+        Schema::create('group_public_holiday', function (Blueprint $table) {
+            // unsigned is needed for foreign key
+            $table->foreignId('group_id')->constrained('groups')->onDelete('cascade');
+            $table->foreignId('public_holiday_id')->constrained('public_holidays')->onDelete('cascade');
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -33,6 +28,6 @@ class GroupHoliday extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('group_holiday');
     }
 }
