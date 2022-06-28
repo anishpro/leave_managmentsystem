@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\DesignationController;
+use App\Http\Controllers\Api\DutyStationController;
 use App\Http\Controllers\Api\GroupController;
+use App\Http\Controllers\Api\LeaveTypeController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RoleController;
@@ -33,9 +36,9 @@ Route::group(
         Route::apiResources(['profile'      =>'ProfileController']);
 
         // Route::apiResources(['profile'      =>'ProfileController']);
-        Route::get('auth_permissions', [PermissionController::class, 'authPermissions']);
-        Route::get('auth_roles', [RoleController::class, 'authRoles']);
-        Route::get('auth_user', function () {
+        Route::get('auth-permissions', [PermissionController::class, 'authPermissions']);
+        Route::get('auth-roles', [RoleController::class, 'authRoles']);
+        Route::get('auth-user', function () {
             return User::where('id', auth()->user()->id)->with('profile')->first();
         });
 
@@ -43,16 +46,18 @@ Route::group(
             Route::put('admin_updated_profile/{id}', [ProfileController::class, 'adminUpdatedProfile']);
         });
 
-        Route::resource('/designations', DesignationController::class);
-        Route::resource('/pillars', PillarController::class);
-        Route::resource('/staff-categories', StaffCategoryController::class);
-        Route::resource('/staff-types', StaffTypeController::class);
-        Route::resource('/course-categories', CourseCategoryController::class);
-
         Route::apiResources(['groups' =>'GroupController']);
         Route::apiResources(['leave-types' =>'LeaveTypeController']);
-        Route::get('choice_role', [RoleController::class, 'choice']);
-        Route::get('choice_group', [GroupController::class, 'choice']);
-        Route::get('choice_permission', [PermissionController::class, 'choice']);
+        Route::apiResources(['contract-leave' =>'MapContractLeaveController']);
+        Route::apiResources(['public-holiday' =>'PublicHolidayController']);
+        Route::apiResources(['duty-station' =>'DutyStationController']);
+        Route::apiResources(['designation' =>'DesignationController']);
+
+        Route::get('choice-role', [RoleController::class, 'choice']);
+        Route::get('choice-group', [GroupController::class, 'choice']);
+        Route::get('choice-permission', [PermissionController::class, 'choice']);
+        Route::get('choice-leave-type', [LeaveTypeController::class, 'choice']);
+        Route::get('choice-duty-station', [DutyStationController::class, 'choice']);
+        Route::get('choice-designation', [DesignationController::class, 'choice']);
     }
 );

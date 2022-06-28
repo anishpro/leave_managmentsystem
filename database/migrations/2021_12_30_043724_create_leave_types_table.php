@@ -17,6 +17,7 @@ class CreateLeaveTypesTable extends Migration
             $table->id();
             $table->string('leave_type')->unique();
             $table->enum('mapping_required', ['no', 'yes']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

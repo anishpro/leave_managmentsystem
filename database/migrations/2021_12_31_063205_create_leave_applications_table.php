@@ -11,7 +11,7 @@ class CreateLeaveApplicationsTable extends Migration
      *
      * @return void
      */
-    public function up() 
+    public function up()
     {
         Schema::create('leave_applications', function (Blueprint $table) {
             $table->id();
@@ -26,8 +26,9 @@ class CreateLeaveApplicationsTable extends Migration
             $table->bigInteger('contact');
             $table->float('leave_days');
             $table->string('attachment');
-            $table->enum('application_status', ['approved','rejected','pending']);
+            $table->enum('application_status', [ 1=>'approved',2=>'rejected',3=>'pending',4=>'re-verification']);
             $table->dateTime('approval_date')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

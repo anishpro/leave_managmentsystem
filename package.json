@@ -34,6 +34,7 @@
         "laravel-vue-pagination": "^3.0.0",
         "mitt": "^3.0.0",
         "sweetalert2": "^11.4.8",
+        "v-calendar": "^3.0.0-alpha.8",
         "vform": "^2.1.2",
         "vue-gates": "^2.1.2",
         "vue-moment": "^4.1.0",

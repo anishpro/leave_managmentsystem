@@ -21,5 +21,10 @@ $fa-font-path: "../webfonts";
 @import "./fontawesome/scss/solid.scss";
 @import "./fontawesome/scss/brands.scss";
 
+@import "vendors/vCalendar";
+@import "vendors/vueMultiSelect";
+@import "vendors/multiselect.scss";
+// Components
+
 
 

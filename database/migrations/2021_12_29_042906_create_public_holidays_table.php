@@ -15,10 +15,9 @@ class CreatePublicHolidaysTable extends Migration
     {
         Schema::create('public_holidays', function (Blueprint $table) {
             $table->id();
-            $table->string('holidays');
+            $table->string('holiday_name');
             $table->text('description')->nullable();
             $table->date('leave_date');
-            $table->string('group_id');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -12,6 +12,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHatWizard } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import 'v-calendar/dist/style.css';
+
 
 library.add(faHatWizard)
 
@@ -46,7 +48,7 @@ const options = {
     confirmButtonColor: '#41b882',
     cancelButtonColor: '#ff7674',
   };
-  
+
 app.use(VueSweetalert2, options);
 
 // //vform
@@ -57,11 +59,11 @@ import {
     AlertError,
     AlertErrors,
     AlertSuccess
-  } from 
+  } from
   'vform/src/components/bootstrap5'
 //   'vform/src/components/bootstrap4'
   // 'vform/src/components/tailwind'
-  
+
   app.component(Button.name, Button)
   app.component(HasError.name, HasError)
   app.component(AlertError.name, AlertError)
@@ -111,7 +113,7 @@ const option = {
     location: 'top',
     inverse: false
   }
-  
+
 app.use(VueProgressBar, option)
 /*Gate for Vue ACL in frontend*/
 import Gate from "./Gate";
@@ -129,11 +131,16 @@ import mitt from 'mitt';
 const emitter = mitt();
 app.config.globalProperties.emitter = emitter;
 
+import VCalendar from 'v-calendar';
+
+// Use plugin with defaults
+app.use(VCalendar, {})
+
 
 app.use(router)
 app.use(store)
 import VueGates from 'vue-gates';
 
 app.use(VueGates,{persistent: true});
-    
+
 app.mount('#app')
