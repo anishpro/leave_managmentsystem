@@ -5,7 +5,7 @@
  <div id="main-wrapper">
     <div class="container">
         <div class="row justify-content-center m-t-100">
-            <div class="col-md-6 col-sm-6 col-6 col-lg-4 col-xl-4">
+            <div class="col-md-7 col-sm-8 col-8 col-lg-5 col-xl-4">
                 <div class="card rounded-0">
                     <div class="card-header pt-3 pb-3 bg-primary border-0 rounded-0">
                         <div class="app-brand text-center">
