@@ -18,6 +18,10 @@ class CreateEmployeesTable extends Migration
             $table->string('emp_code')->unique();
             $table->string('name');
             $table->bigInteger('phone')->nullable();
+            $table->foreignId('group_id')->nullable()->constrained('groups')->onDelete('cascade');
+            $table->foreignId('designation_id')->nullable()->constrained('designations')->onDelete('cascade');
+            $table->foreignId('duty_station_id')->nullable()->constrained('duty_stations')->onDelete('cascade');
+            $table->foreignId('supervisor')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('email')->unique();
             $table->text('address')->nullable();
             $table->text('signature')->nullable();

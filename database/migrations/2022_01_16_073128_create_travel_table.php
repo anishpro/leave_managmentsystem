@@ -15,7 +15,7 @@ class CreateTravelTable extends Migration
     {
         Schema::create('travel', function (Blueprint $table) {
             $table->id();
-            $table->integer('emp_id')->foreign('emp_id')->references('employees')->on('id')->onDelete('cascade');
+            $table->integer('user_id')->constrained('users')->onDelete('cascade');
             $table->string('travel_month');
             $table->string('PO');
             $table->float('misc_expense')->nullable();

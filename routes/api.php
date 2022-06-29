@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ContractTypeController;
 use App\Http\Controllers\Api\DesignationController;
 use App\Http\Controllers\Api\DutyStationController;
 use App\Http\Controllers\Api\GroupController;
@@ -7,6 +8,9 @@ use App\Http\Controllers\Api\LeaveTypeController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\SupervisorController;
+use App\Http\Controllers\Api\ContractController;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +56,10 @@ Route::group(
         Route::apiResources(['public-holiday' =>'PublicHolidayController']);
         Route::apiResources(['duty-station' =>'DutyStationController']);
         Route::apiResources(['designation' =>'DesignationController']);
+        Route::apiResources(['contract-type' =>'ContractTypeController']);
+        Route::apiResources(['contract' =>'ContractController']);
+
+
 
         Route::get('choice-role', [RoleController::class, 'choice']);
         Route::get('choice-group', [GroupController::class, 'choice']);
@@ -59,5 +67,7 @@ Route::group(
         Route::get('choice-leave-type', [LeaveTypeController::class, 'choice']);
         Route::get('choice-duty-station', [DutyStationController::class, 'choice']);
         Route::get('choice-designation', [DesignationController::class, 'choice']);
+        Route::get('choice-supervisor', [SupervisorController::class, 'index']);
+        Route::get('choice-contract-type', [ContractTypeController::class, 'choice']);
     }
 );

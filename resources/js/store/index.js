@@ -13,6 +13,12 @@ export const store = createStore({
       roles: [],
       leave_types: [],
       groups: [],
+      duty_stations:[],
+      supervisors:[],
+      designations:[],
+      contract_types:[],
+
+
     }
   },
   mutations: {
@@ -35,13 +41,10 @@ export const store = createStore({
         state.staffTypes = value
     },
     setContractTypes (state, value) {
-      state.contractTypes = value
+      state.contract_types = value
     },
     setStaffCategories (state, value) {
       state.staffCategories = value
-    },
-    setDesignations (state, value) {
-      state.designations = value
     },
     setCourseCategories (state, value) {
       state.courseCategories = value
@@ -49,12 +52,23 @@ export const store = createStore({
     setSupervisors (state, value) {
       state.supervisors = value
     },
-    setLeaveType(state, value) {
+    setLeaveTypes(state, value) {
         state.leave_types = value
     },
-    setGroup(state, value) {
+    setGroups(state, value) {
         state.groups = value
     },
+    setDutyStations(state, value) {
+        state.duty_stations = value
+    },
+    setSupervisors(state, value) {
+        state.supervisors = value
+    },
+    setDesignation(state, value) {
+        state.designations = value
+    },
+
+
   },
   actions: {
     async fetchAuthUser({ commit }) {
@@ -91,11 +105,25 @@ export const store = createStore({
         commit('setRoles', data.data)
 
         const group_choice = await axios.get('/api/choice-group')
-          commit('setGroup', group_choice.data)
+          commit('setGroups', group_choice.data)
 
         const leave_choice = await axios.get('/api/choice-leave-type')
-          commit('setLeaveType', leave_choice.data)
+          commit('setLeaveTypes', leave_choice.data)
+
+        const duty_station_choice = await axios.get('/api/choice-duty-station')
+          commit('setDutyStations', duty_station_choice.data)
+
+        const supervisor_choice = await axios.get('/api/choice-supervisor')
+          commit('setSupervisors', supervisor_choice.data)
+
+        const designation_choice = await axios.get('/api/choice-designation')
+
+          commit('setDesignation', designation_choice.data)
+
+        const contract_type_choice = await axios.get('/api/choice-contract-type')
+          commit('setContractTypes', contract_type_choice.data)
         }
+
         catch (error) {
     }
   }

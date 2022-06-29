@@ -16,7 +16,7 @@ class ProfileController extends BaseController
         $this->model = $model;
         $this->folder_path = 'images'.DIRECTORY_SEPARATOR.$this->folder;
     }
-    
+
     /**
      * Display a listing of the resource.
      *

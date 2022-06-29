@@ -18,6 +18,7 @@ class CreateMapContractLeavesTable extends Migration
             $table->integer('leave_type_id')->foreign('leave_type_id')->references('leave_types')->on('id')->onDelete('cascade');
             $table->float('contract_month');
             $table->float('leave_days');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

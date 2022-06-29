@@ -12,7 +12,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHatWizard } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import 'v-calendar/dist/style.css';
 
 
 library.add(faHatWizard)

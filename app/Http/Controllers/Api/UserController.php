@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return $this->user->with('roles:name', 'profile')
+        return $this->user->with('roles:name', 'profile','contracts')
         // ->whereHas('profile', function ($q) {
         //     $q->where('supervisor', auth()->user()->id);
         // })
@@ -89,7 +89,7 @@ class UserController extends Controller
             if (!empty($request->password)) {
                 $request->merge(['password' => Hash::make($request['password'])]);
             }
-            
+
             $user->update($request->all());
             $roles = [];
             foreach ($request->roles as $role) {

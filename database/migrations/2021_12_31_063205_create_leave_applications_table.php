@@ -15,9 +15,8 @@ class CreateLeaveApplicationsTable extends Migration
     {
         Schema::create('leave_applications', function (Blueprint $table) {
             $table->id();
-            $table->integer('contract_id')->foreign('contract_id')->references('employee_contracts')->on('id')->onDelete('cascade');
-            $table->integer('emp_id')->foreign('emp_id')->references('employees')->on('id')->onDelete('cascade');
-            $table->integer('leave_type_id')->foreign('leave_type_id')->references('leave_types')->on('id')->onDelete('cascade');
+            $table->integer('leave_type_id')->constrained('leave_types')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('from_date');
             $table->date('to_date');
             $table->integer('day_count');
