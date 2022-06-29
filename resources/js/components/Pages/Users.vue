@@ -18,7 +18,7 @@
                                 <th>S.N.</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Status</th>                                
+                                <th>Status</th>
                                 <th>Contact</th>
                                 <th>Actions</th>
                                 <th>Contract Info</th>
@@ -29,25 +29,25 @@
                                 </td>
                                 <td>{{user.email}}</td>
                                 <td>
-                                <p v-if="user.is_verified == '1'" class="">Verified </p>   
-                                <p v-else-if="user.is_verified == '2'" class="">Disapproved </p>   
-                                <p v-else class="">Pending </p>   
+                                <p v-if="user.is_verified == '1'" class="">Verified </p>
+                                <p v-else-if="user.is_verified == '2'" class="">Disapproved </p>
+                                <p v-else class="">Pending </p>
                                 </td>
                                 <td>{{user.profile ? user.profile.phone : ''}}</td>
                                 <td>
-                                    <a href="#" @click="editModal(user)" class=" text-success mr-2">
+                                    <a href="#" tooltip="Edit User Info"  @click="editModal(user)" class=" text-success mr-2">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                     <a href="#" @click="updateProfileModal(user)" class=" text-warning mr-2">
+                                     <a href="#" tooltip="Update Profile" @click="updateProfileModal(user)" class=" text-warning mr-2">
                                         <i class="fa fa-user"></i>
                                     </a>
-                                    <a href="#" @click="verify(user,1)" class=" text-success mr-2">
+                                    <a href="#" tooltip="verify User" @click="verify(user,1)" class=" text-success mr-2">
                                         <i class="fa fa-check"></i>
                                     </a>
-                                    <a href="#" @click="deleteUser(user.id)" class=" text-danger mr-2">
+                                    <a href="#" tooltip="Delete Contract" @click="deleteUser(user.id)" class=" text-danger mr-2">
                                         <i class="fa fa-trash"></i>
                                     </a>
-                                   
+
                                 </td>
                                   <td>
                                     <div class="accordion" id="accordionExample">
@@ -71,26 +71,26 @@
                                                         <td>{{contract.contract_start}}</td>
                                                         <td>{{contract.contract_end}}</td>
                                                         <td>
-                                                            <a href="#" @click="editContractModal(contract)" class="m-2">
-                                                                <i class="fa fa-edit"></i>
+                                                            <a href="#" tooltip="Edit Contract" @click="editContractModal(contract)" class="m-2">
+                                                                <i  class="fa fa-edit"></i>
                                                             </a>
-                                                            <a href="#" @click="deleteContract(contract.id)" class="">
+                                                            <a href="#" tooltip="Delete Contract" @click="deleteContract(contract.id)" class="">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
-                                                                                            
+
                                                         </td>
 
                                                     </tr>
                                                     </tbody>
                                                 </table>
-                                
+
 
                                             </div>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                
+
                             </tr>
                             </tbody></table>
                     </div>
@@ -102,7 +102,7 @@
                 <!-- /.card -->
             </div>
         </div>
-       
+
         <!-- Modal -->
         <div class="modal fade" id="addNewUser" tabindex="-1" role="dialog" aria-labelledby="addNewUserLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg  modal-dialog-centered" role="document">
@@ -110,7 +110,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" v-show="!editmode" id="addNewUserLabel">Add New User</h5>
                         <h5 class="modal-title" v-show="editmode" id="addNewUserLabel">Update User</h5>
-                        
+
                     </div>
                     <form  @submit.prevent="editmode ? updateUser() : createUser()">
                         <div class="modal-body">
@@ -136,7 +136,7 @@
                                                 :taggable="true">
                                             </multiselect>
                                         </div>
-                                        
+
                                         <div class="form-group col-md-6">
                                             <label for="password" >Password *</label>
 
@@ -161,7 +161,7 @@
         </div>
 
 
-        <!-- Modal -->
+        <!-- Modal  update profile-->
         <div class="modal fade" id="addNewProfile" tabindex="-1" role="dialog" aria-labelledby="addNewProfileLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg  modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <h6>Duty Station</h6>
-                                    <multiselect v-model="pform.duty_station"
+                                    <multiselect v-model="pform.duty_station_id"
                                         tag-placeholder="Select Duty Station"
                                         placeholder="Select Duty Station"
                                         label = "name"
@@ -217,7 +217,20 @@
                                     </multiselect>
                                 <has-error :form="pform" field="supervisor"></has-error>
                                 </div>
-                            </div> 
+                                <div class="form-group col-md-6">
+                                    <h6>Designation</h6>
+                                    <multiselect v-model="form.designation_id"
+                                        tag-placeholder="Designation"
+                                        placeholder="Select Designation"
+                                        :options="Object.keys(designations).map(Number)"
+                                        :custom-label="opt => designations[opt]"
+                                        :multiple="false"
+                                        :allow-empty="false"
+                                        :taggable="true"
+                                        >
+                                    </multiselect>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times fa-fw"></i>Close</button>
@@ -228,47 +241,55 @@
             </div>
         </div>
 
-        <!-- contact Modal -->
+        <!-- contract Modal -->
          <modal :form="form" :modal_data="c_modal_data" :editmode="editmode" :api_url="'contract'">
             <h4 class="modal-header">Contract Information : {{this.form.name}}</h4>
-            
-            <div class="form-group col-md-6">
-                <label for="first_name" >Contract Start Date*</label>
-                    <input type="text" v-model="form.contract_start" class="form-control"  placeholder="Contract Start Date" :class="{ 'is-invalid': form.errors.has('contract_start') }">
-                    <has-error :form="form" field="contract_start"></has-error>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="first_name" >Contract End Date*</label>
-                    <input type="text" v-model="form.contract_end" class="form-control"  placeholder="Contract End Date" :class="{ 'is-invalid': form.errors.has('contract_end') }">
-                    <has-error :form="form" field="contract_end"></has-error>
-            </div>
-            <div class="form-group col-md-6">
-                <h6>Staff Type</h6>
-                <multiselect v-model="form.staff_type_id"
-                    tag-placeholder="Saff Type"
-                    placeholder="Select Staff Type"
-                    :options="Object.keys(staff_types).map(Number)"
-                    :custom-label="opt => staff_types[opt]"
-                    :multiple="false"
-                    :allow-empty="false"
-                    :taggable="true"
-                    >
-                </multiselect>
-            </div> 
 
             <div class="form-group col-md-6">
-                <h6>Designation</h6>
-                <multiselect v-model="form.designation_id"
-                    tag-placeholder="Designation"
-                    placeholder="Select Designation"
-                    :options="Object.keys(designations).map(Number)"
-                    :custom-label="opt => designations[opt]"
-                    :multiple="false"
-                    :allow-empty="false"
-                    :taggable="true"
-                    >
-                </multiselect>
-            </div> 
+                <label  class=" col-form-label">Contract Start Date <span class="text-danger">*</span></label>
+                <div class="">
+                    <v-date-picker v-model="form.contract_start"  name="due_date"  :class="{ 'is-invalid': form.errors.has('contract_start')}"
+                        :model-config="{
+                            type: 'string',
+                            mask: 'YYYY-MM-DD',
+                        }"
+                        :masks="masks"
+                        mode="date"
+                        >
+                        <template v-slot="{ inputValue, inputEvents }">
+                            <input
+                            class="form-control"
+                            :value="inputValue"
+                            v-on="inputEvents"
+                            />
+                        </template>
+                        </v-date-picker>
+                </div>
+                <has-error :form="form" field="contract_start"></has-error>
+            </div>
+            <div class="form-group col-md-6">
+                <label  class=" col-form-label">Contract End Date <span class="text-danger">*</span></label>
+                <div class="">
+                    <v-date-picker v-model="form.contract_end"  name="due_date"  :class="{ 'is-invalid': form.errors.has('contract_end')}"
+                        :model-config="{
+                            type: 'string',
+                            mask: 'YYYY-MM-DD',
+                        }"
+                        :masks="masks"
+                        mode="date"
+                        >
+                        <template v-slot="{ inputValue, inputEvents }">
+                            <input
+                            class="form-control"
+                            :value="inputValue"
+                            v-on="inputEvents"
+                            />
+                        </template>
+                        </v-date-picker>
+                </div>
+                <has-error :form="form" field="contract_end"></has-error>
+            </div>
+
             <div class="form-group col-md-6">
                 <h6>Contract Type</h6>
                 <multiselect v-model="form.contract_type_id"
@@ -281,24 +302,12 @@
                     :taggable="true"
                     >
                 </multiselect>
-            </div> 
-            <div class="form-group col-md-6">
-                <h6>Staff Category</h6>
-                <multiselect v-model="form.staff_category_id"
-                    tag-placeholder="Staff Category"
-                    placeholder="Select Staff Category"
-                    :options="Object.keys(staff_categories).map(Number)"
-                    :custom-label="opt => staff_categories[opt]"
-                    :multiple="false"
-                    :allow-empty="false"
-                    :taggable="true"
-                    >
-                </multiselect>
-            </div> 
-            <div class="col-md-6 mt-3">
-                <div class="form-group  form-control">
+            </div>
+
+            <div class="form-group col-md-6 mt-3">
+                <div class=" m-4">
                     <input v-model="form.is_active" true-value="1" false-value="0" type="checkbox" name="is_active"  class="form-check-input" :class="{ 'is-invalid': form.errors.has('is_active') }">
-                    <label class="form-check-label" for="1">
+                    <label for="1">
                         Is Active
                     </label>
                 </div>
@@ -329,14 +338,11 @@
                 totaluser: 0,
                 users: {},
                 roles: this.$store.state.roles,
-                groups:[],
-                duty_stations:[],
-                supervisors:[],
-                designations:[],
-                staff_categories:[],
-                contract_types:[],
-                staff_types:[],
-
+                groups: this.$store.state.groups,
+                duty_stations: this.$store.state.duty_stations,
+                supervisors: this.$store.state.supervisors,
+                designations:this.$store.state.designations,
+                contract_types:this.$store.state.contract_types,
                 c_modal_data:{
                     modal_size:'modal-lg',
                     modal_name:'addNewContract'
@@ -352,15 +358,10 @@
                     roles: null,
                     is_verified:null,
                     pillar_id: null,
-                    supervisor_user_id:null,
                     user_id:null,
-                    contract_type_id:null,
                     contract_start:null,
                     contract_end:null,
                     is_active: null,
-                    staff_type_id:null,
-                    designation_id:null,
-                    staff_category_id:null,
                     contract_type_id:null
                 }),
                 pform: new Form({
@@ -368,14 +369,15 @@
                     name:null,
                     email:null,
                     user_id:null,
-                    duty_station:null,
+                    duty_station_id:null,
                     group_id:null,
                     emp_code:null,
                     supervisor:null,
-                    
+                    designation_id:null,
+
                 }),
                 api_url:null,
-                
+
             }
         },
         methods: {
@@ -550,6 +552,8 @@
                             )
                         this.$Progress.finish();
                         $('#addNewProfile').modal('hide');
+                        this.emitter.emit('AfterCreate'); //Fire an reload event
+
                     }else{
                         this.$swal(
                                 'Error!',
@@ -572,7 +576,7 @@
             async loadUsers() {
                 const {data}  = await  axios.get("/api/user")
                 this.users = data,
-                
+
                 this.api_url = 'api/user'
                 /*==== End of existing User ====*/
             },

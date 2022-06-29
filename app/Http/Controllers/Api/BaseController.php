@@ -58,4 +58,15 @@ class BaseController extends Controller
         $time =  ($d[0] * 3600) + ($d[1] * 60) + $d[2];
         return $time;
     }
+    //get month count from start date to end date
+    public function getMonthsCount($start_date, $end_date)
+    {
+
+        $start_date = strtotime($start_date);
+        $end_date = strtotime($end_date);
+        return round($end_date - $start_date) / (30 * 60 * 60 * 24);
+
+    }
+
+
 }

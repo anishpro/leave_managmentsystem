@@ -8,6 +8,8 @@ import User from "../components/Pages/Users.vue";
 import Profile from "../components/Pages/Profile.vue";
 import Group from "../components/Pages/Group.vue";
 import LeaveType from "../components/Pages/LeaveType.vue";
+import ContractType from "../components/Pages/ContractType.vue";
+
 import ContractLeave from "../components/Pages/MapLeaveTypeToContract.vue";
 import DutyStation from "../components/Pages/DutyStation.vue";
 
@@ -58,6 +60,13 @@ const routes = [
     name: "leave-types",
     components:{
       backend : LeaveType
+    }
+  },
+  {
+    path: admin_prefix+"/contract-types",
+    name: "contract-types",
+    components:{
+      backend : ContractType
     }
   },
   {

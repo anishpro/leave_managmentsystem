@@ -1,0 +1,16 @@
+
+.multiselect__tag {
+  background: $color-sec-blue !important;
+}
+
+.multiselect__option--highlight {
+  background: $color-sec-blue !important;
+}
+
+.multiselect__option--highlight.multiselect__option--selected {
+  background: $color-red !important;
+}
+
+.multiselect__option--highlight::after {
+  background: $color-sec-blue !important;
+}
